@@ -16,7 +16,7 @@
 
 /**
  * Font rule render class (used for BBCode)
- * 
+ *
  * @category   Text
  * @package    Text_Wiki
  * @author     Bertrand Gugger <bertrand@toggg.com>
@@ -27,7 +27,7 @@
  * @see        Text_Wiki::Text_Wiki_Render()
  */
 class Text_Wiki_Render_Xhtml_Font extends Text_Wiki_Render {
-    
+
 /*    var $size = array(
         'xx-small',
         'x-small',
@@ -49,11 +49,11 @@ class Text_Wiki_Render_Xhtml_Font extends Text_Wiki_Render {
         'pt',
         'pc'
     );
-*/    
-    
+*/
+
     /**
       * Renders a token into text matching the requested format.
-      * process the font size option 
+      * process the font size option
       *
       * @access public
       * @param array $options The "options" portion of the token (second element).
@@ -76,8 +76,7 @@ class Text_Wiki_Render_Xhtml_Font extends Text_Wiki_Render {
             }
             $ret .= "font-size: $size;";
         }
-        
+
         return $ret.'">';
     }
 }
-?>

@@ -48,4 +48,3 @@ class Text_Wiki_Render_Xhtml_Horiz extends Text_Wiki_Render {
         return "<hr$css />\n";
     }
 }
-?>

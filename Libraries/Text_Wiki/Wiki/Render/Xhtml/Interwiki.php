@@ -100,4 +100,3 @@ class Text_Wiki_Render_Xhtml_Interwiki extends Text_Wiki_Render {
         return $output;
     }
 }
-?>

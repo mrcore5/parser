@@ -188,11 +188,11 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':plan:'         => array('plan', 'Plan', ':plans:', ':blueprint:', ':blueprints:'),
             ':hplan:'        => array('plan_h', 'Plan', ':hplans:', ':hblueprint:', ':hblueprints:'),
             ':plan2:'        => array('plan2', 'Plan', ':plans2:', ':blueprint2:', ':blueprints2:'),
-            ':hplan2:'       => array('plan2_h', 'Plan', ':hplans2:', ':hblueprint2:', ':hblueprints2:'),            
+            ':hplan2:'       => array('plan2_h', 'Plan', ':hplans2:', ':hblueprint2:', ':hblueprints2:'),
 
             ':clipboard:'    => array('clipboard', 'Clipboard'),
             ':hclipboard:'   => array('clipboard_h', 'Clipboard'),
-            
+
             ':comment:'      => array('comment', 'Comment', ':comments:'),
             ':hcomment:'     => array('comment_h', 'Comment', ':hcomments:'),
             ':comment2:'     => array('comment2', 'Comment', ':comments2:'),
@@ -203,14 +203,14 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':hcomment4:'    => array('comment4_h', 'Comment', ':hcomments4:'),
             ':comment5:'     => array('comment5', 'Comment', ':comments5:'),
             ':hcomment5:'    => array('comment5_h', 'Comment', ':hcomments5:'),
-            
+
             ':construction:'  => array('construction', 'Construction'),
             ':hconstruction:' => array('construction_h', 'Construction'),
             ':construction2:' => array('construction2', 'Construction'),
             ':hconstruction2:'=> array('construction2_h', 'Construction'),
             ':construction3:' => array('construction3', 'Construction'),
             ':hconstruction3:'=> array('construction3_h', 'Construction'),
-            
+
             ':error:'        => array('error', 'Error', ':errors:'),
             ':herror:'       => array('error_h', 'Error', ':herrors:'),
             ':error2:'       => array('error2', 'Error', ':errors2:'),
@@ -219,25 +219,25 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':herror3:'      => array('error3_h', 'Error', ':herrors3:'),
             ':error4:'       => array('error4', 'Error', ':errors4:'),
             ':herror4:'      => array('error4_h', 'Error', ':herrors4:'),
-            
+
             ':graph:'        => array('graph', 'Graph'),
             ':hgraph:'       => array('graph_h', 'Graph'),
             ':graph2:'       => array('graph2', 'Graph'),
             ':hgraph2:'      => array('graph2_h', 'Graph'),
-            
+
             ':help:'         => array('help', 'Help'),
             ':hhelp:'        => array('help_h', 'Help'),
             ':help2:'        => array('help2', 'Help'),
             ':hhelp2:'       => array('help2_h', 'Help'),
-            
+
             ':info:'         => array('info', 'Info', ':summary:'),
             ':hinfo:'        => array('info_h', 'Info', ':hsummary:'),
             ':info2:'        => array('info2', 'Info', ':summary2:'),
             ':hinfo2:'       => array('info2_h', 'Info', ':hsummary2:'),
-            
+
             ':search:'       => array('search', 'Search'),
             ':hsearch:'      => array('search_h', 'Search'),
-            
+
             ':config:'       => array('config', 'Config', ':settings:', ':setting:'),
             ':hconfig:'      => array('config_h', 'Config', ':hsettings:', ':hsetting:'),
             ':config2:'      => array('config2', 'Config', ':settings2:', ':setting2:'),
@@ -247,28 +247,28 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':config4:'      => array('config4', 'Config', ':settings4:', ':setting4:'),
             ':hconfig4:'     => array('config4_h', 'Config', ':hsettings4:', ':hsetting4:'),
 
-            
+
             ':stop:'         => array('stop', 'Stop'),
             ':hstop:'        => array('stop_h', 'Stop'),
             ':stop2:'        => array('stop2', 'Stop'),
             ':hstop2:'       => array('stop2_h', 'Stop'),
             ':stop3:'        => array('stop3', 'Stop'),
             ':hstop3:'       => array('stop3_h', 'Stop'),
-            
+
             ':add:'          => array('add', 'Add', ':plus:'),
             ':hadd:'         => array('add_h', 'Add', ':hplus:'),
             ':subtract:'     => array('subtract', 'Subtract', ':minus:'),
             ':hsubtract:'    => array('subtract_h', 'Subtract', ':hminus:'),
             ':check:'        => array('check', 'Check'),
             ':hcheck:'       => array('check_h', 'Check'),
-            
+
             ':thumbdown:'    => array('thumbdown', 'Thumb Down', ':thumbsup:'),
             ':thumbup:'      => array('thumbup', 'Thumb Up', ':thumbsdown'),
             ':hthumbdown:'   => array('thumbdown_h', 'Thumb Down', ':hthumbsup:'),
             ':hthumbup:'     => array('thumbup_h', 'Thumb Up', ':hthumbsdown'),
             ':doc:'          => array('doc', 'Document', ':docs:', ':document:', ':documents:'),
             ':hdoc:'         => array('doc_h', 'Document', ':hdocs:', ':hdocument:', ':hdocuments:'),
-            
+
             ':link:'         => array('link', 'Link', ':links:'),
             ':hlink:'        => array('link_h', 'Link', ':hlinks:'),
             ':link2:'        => array('link2', 'Link', ':links2:'),
@@ -279,7 +279,7 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':hlink4:'       => array('link4_h', 'Link', ':hlinks4:'),
             ':link5:'        => array('link5', 'Link', ':links5:'),
             ':hlink5:'       => array('link5_h', 'Link', ':hlinks5:'),
-            
+
             ':book:'         => array('book', 'Book', ':books:', ':read:', ':reading:', ':readme:'),
             ':hbook:'        => array('book_h', 'Book', ':hbooks:', ':hread:', ':hreading:', ':hreadme:'),
             ':anchor:'       => array('anchor', 'Anchor', ':anchors:'),
@@ -291,12 +291,12 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':hnote2:'       => array('note2_h', 'Postit', ':hpostits2:', ':hsticky2:', ':hstickies2:', ':hpostit2:', ':hnotes2:'),
             ':note3:'        => array('note3', 'Postit', ':postits3:', ':sticky3:', ':stickies3:', ':postit3:', ':notes3:'),
             ':hnote3:'       => array('note3_h', 'Postit', ':hpostits3:', ':hsticky3:', ':hstickies3:', ':hpostit3:', ':hnotes3:'),
-            
+
             ':map:'          => array('map', 'Map', ':maps:', ':goal:', ':goals:'),
             ':hmap:'         => array('map_h', 'Map', ':maps:', ':hgoal:', ':hgoals:'),
             ':map2:'         => array('map2', 'Map', ':maps2:', ':goal2:', ':goals2:'),
             ':hmap2:'        => array('map2_h', 'Map', ':maps2:', ':hgoal2:', ':hgoals2:'),
-            
+
             ':split:'        => array('split', 'Split'),
             ':hsplit:'       => array('split_h', 'Split'),
             ':join:'         => array('join', 'Join'),
@@ -311,12 +311,12 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':hundo:'        => array('undo_h', 'Undo'),
             ':redo:'         => array('redo', 'Redo'),
             ':hredo:'        => array('redo_h', 'Redo'),
-            
+
             ':resource:'     => array('resource', 'Resource', ':resources:', ':reference:', ':references:'),
             ':hresource:'    => array('resource_h', 'Resource', ':hresources:', ':hreference:', ':hreferences:'),
             ':resource2:'    => array('resource2', 'Resource', ':resources2:', ':reference2:', ':references2:'),
             ':hresource2:'   => array('resource2_h', 'Resource', ':hresources2:', ':hreference2:', ':hreferences2:'),
-            
+
             ':shell:'        => array('shell', 'Shell'),
             ':hshell:'       => array('shell_h', 'Shell'),
             ':shell2:'       => array('shell2', 'Shell'),
@@ -325,7 +325,7 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':hshell3:'      => array('shell3_h', 'Shell'),
             ':shell4:'       => array('shell4', 'Shell'),
             ':hshell4:'      => array('shell4_h', 'Shell'),
-            
+
             ':flag:'         => array('flag', 'Flag', ':flags:'),
             ':hflag:'        => array('flag_h', 'Flag', ':hflags:'),
             ':flag2:'        => array('flag2', 'Flag', ':flags2:'),
@@ -338,7 +338,7 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':hflag5:'       => array('flag5_h', 'Flag', ':flags5:'),
             ':flag6:'        => array('flag6', 'Flag', ':flags6:'),
             ':hflag6:'       => array('flag6_h', 'Flag', ':flags6:'),
-            
+
             ':star:'         => array('star', 'Star'),
             ':hstar:'        => array('star_h', 'Star'),
             ':star2:'        => array('star2', 'Star'),
@@ -349,12 +349,12 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':hstar4:'       => array('star4_h', 'Star'),
             ':star5:'        => array('star5', 'Star'),
             ':hstar5:'       => array('star5_h', 'Star'),
-            
+
             ':related:'      => array('related', 'Related'),
             ':hrelated:'     => array('related_h', 'Related'),
             ':related2:'     => array('related2', 'Related'),
             ':hrelated2:'    => array('related2_h', 'Related'),
-            
+
             ':install:'      => array('install', 'Install'),
             ':hinstall:'     => array('install_h', 'Install'),
             ':install2:'     => array('install2', 'Install'),
@@ -390,13 +390,13 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':code6:'        => array('code6', 'Code'),
             ':hcode6:'       => array('code6_h', 'Code'),
 
-            
+
             ':hd:'           => array('hd', 'Hard Drive', ':harddrive:', ':hds:', ':harddrives:'),
             ':hhd:'          => array('hd_h', 'Hard Drive', ':hharddrive:', ':hhds:', ':hharddrives:'),
             ':hd2:'          => array('hd2', 'Hard Drive', ':harddrive2:', ':hds2:', ':harddrives2:'),
-            ':hhd2:'         => array('hd2_h', 'Hard Drive', ':hharddrive2:', ':hhds2:', ':hharddrives2:'),            
+            ':hhd2:'         => array('hd2_h', 'Hard Drive', ':hharddrive2:', ':hhds2:', ':hharddrives2:'),
             ':hd3:'          => array('hd3', 'Hard Drive', ':harddrive3:', ':hds3:', ':harddrives3:'),
-            ':hhd3:'         => array('hd3_h', 'Hard Drive', ':hharddrive3:', ':hhds3:', ':hharddrives3:'),            
+            ':hhd3:'         => array('hd3_h', 'Hard Drive', ':hharddrive3:', ':hhds3:', ':hharddrives3:'),
 
             ':computer:'     => array('computer', 'Computer'),
             ':hcomputer:'    => array('computer_h', 'Computer'),
@@ -530,7 +530,7 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
         if (isset($global_smileys)) {
             $this->_smileys = array_merge($this->_smileys, $global_smileys);
         }
-        
+
         $reg1 = $reg2 = '';
         $sep1 = ':(?:';
         $sep2 = '';
@@ -587,4 +587,3 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ));
     }
 }
-

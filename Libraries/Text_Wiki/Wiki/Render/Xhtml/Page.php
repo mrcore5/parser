@@ -43,4 +43,3 @@ class Text_Wiki_Render_Xhtml_Page extends Text_Wiki_Render {
         return 'PAGE MARKER HERE*&^%$#^$%*PAGEMARKERHERE';
     }
 }
-?>

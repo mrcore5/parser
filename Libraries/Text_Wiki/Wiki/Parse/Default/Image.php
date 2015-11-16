@@ -137,4 +137,3 @@ class Text_Wiki_Parse_Image extends Text_Wiki_Parse {
         return $this->wiki->addToken($this->rule, $options);
     }
 }
-?>

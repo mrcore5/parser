@@ -1,18 +1,35 @@
 <?php namespace Mrcore\Parser;
 
 use cebe\markdown\GithubMarkdown;
+use cebe\markdown\block\TableTrait;
+#use Mrcore\Parser\Markdown\Inline\FileTrait;
+use Mrcore\Parser\Markdown\Block\FileTrait;
+use Mrcore\Parser\Markdown\Inline\EmojiTrait;
 
-class Markdown extends Parser
+class Markdown extends GithubMarkdown
 {
+	// Existing trait overrides
+	use TableTrait;
+
+	// New mrcore traints
+	use EmojiTrait;
+	use FileTrait;
+
+	public function __construct()
+	{
+		$this->html5 = true;
+	}
 
 	/**
-	 * Parse this github flavored markdown $data into HTML
-	 * @return string
+	 * render a table block
 	 */
-	public function parse($data)
+	protected function renderTable($block)
 	{
-		$parser = new GithubMarkdown();
-		return $parser->parse($data);
+		return str_replace(
+			"<table>",
+			"<table class='table table-condensed table-bordered table-striped table-hover dataTable no-footer'>",
+			parent::renderTable($block)
+		);
 	}
 
 }

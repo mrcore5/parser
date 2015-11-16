@@ -48,5 +48,3 @@ class Text_Wiki_Render_Xhtml_SpecialChar extends Text_Wiki_Render {
         }
     }
 }
-
-?>

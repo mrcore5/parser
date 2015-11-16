@@ -52,12 +52,12 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
     {
         // note the image source
         $src = $options['src'];
-        
+
 
         // is the source a local file or URL?
         if (preg_match('"local:/"', $src)) {
             $src = substr($src, 6);
-            
+
         }elseif (strpos($src, '://') === false) {
             $postID = \Mrcore::post()->id();
             $src = preg_replace('"^files"i', '', $src);
@@ -72,7 +72,7 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
 
             $src = $this->getConf('base', '/').$src;
         }
-        
+
 
         // stephane@metacites.net
         // is the image clickable?
@@ -111,7 +111,7 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
                     }
                 };
                 $href = $standardizePath($href);
-                
+
 
             #} else {
                 // it's a WikiPage; assume it exists.
@@ -151,7 +151,7 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
                 $options['attr']['style'] .=
                     'float: '.$options['attr']['align'];
             }
-            
+
             // unset so it won't show up as an attribute
             unset($options['attr']['align']);
         }
@@ -232,4 +232,3 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
         return $output;
     }
 }
-?>

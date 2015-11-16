@@ -76,4 +76,3 @@ class Text_Wiki_Render_Xhtml_Colortext extends Text_Wiki_Render {
         }
     }
 }
-?>

@@ -74,4 +74,3 @@ class Text_Wiki_Render_Xhtml_Smiley extends Text_Wiki_Render {
         return '<img src="'.$this->textEncode($imageFile).'" alt="'.$options['desc'].'"'.$this->formatConf(' class="%s"', 'css') . ' />';
     }
 }
-?>

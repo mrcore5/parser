@@ -96,7 +96,7 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
             // the page always comes at the end, and the new
             // form that uses %s for sprintf()
             $href = $this->getConf('view_url');
-            
+
             //mReschke get pageID and page name
             $topic_id = 0;
             if (is_numeric($page)) {
@@ -137,12 +137,12 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
             //mReschke
             $start = '<a'.$css.' href="'.$this->textEncode($href).'">';
             if (strlen($anchor) > 1) {
-                $start = '<a'.$css.' href="'.$this->textEncode($href).'" onclick="toggle_wiki_headers(false);">';    
+                $start = '<a'.$css.' href="'.$this->textEncode($href).'" onclick="toggle_wiki_headers(false);">';
             } else {
                 $start = '<a'.$css.' href="'.$this->textEncode($href).'">';
             }
-            
-            
+
+
             $end = '</a>';
         } else {
 
@@ -150,16 +150,16 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
             if (!is_numeric($page)) {
                 // link to a create-page url, but only if new_url is set
                 $href = $this->getConf('new_url', null);
-    
+
                 // set the proper HREF
                 if (! $href || trim($href) == '') {
-    
+
                     // no useful href, return the text as it is
                     //TODO: This is no longer used, need to look closer into this branch
                     $output = $text;
-    
+
                 } else {
-    
+
                     // yes, link to the new-page href, but we have to build
                     // it.  we support both the old form where
                     // the page always comes at the end, and the new
@@ -172,16 +172,16 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
                         $href = sprintf($href, $this->urlEncode($page));
                     }
                 }
-    
+
                 // get the appropriate CSS class and new-link text
                 $css = ' class="'.$this->textEncode($this->getConf('css_new')).'"';
                 $new = $this->getConf('new_text');
-    
+
                 // what kind of linking are we doing?
                 $pos = $this->getConf('new_text_pos');
                 if (! $pos || ! $new) {
                     // no position (or no new_text), use css only on the page name
-    
+
                     $start = '<a'.$css.' href="'.$this->textEncode($href).'">';
                     $end = '</a>';
                 } elseif ($pos == 'before') {
@@ -200,7 +200,7 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
             //Means no |alternate)
             $text = $topic_title;
         }
-        
+
         if (!strlen($text)) {
             $start .= $this->textEncode($page);
         }
@@ -220,4 +220,3 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
         return $output;
     }
 }
-?>

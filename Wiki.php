@@ -405,10 +405,7 @@ Class Wiki extends Parser
 
 		// configure code
 		$wiki->setRenderConf('xhtml', 'code', 'css', 'code');
-		$wiki->setRenderConf('xhtml', 'code', 'css_outer', 'code_outer');
-		#$wiki->setRenderConf('xhtml', 'code', 'css_outer', 'code_outer panel panel-default');
-		$wiki->setRenderConf('xhtml', 'code', 'css_header', 'code_header text-info');
-		#$wiki->setRenderConf('xhtml', 'code', 'css_header', 'code_header panel-heading');
+		$wiki->setRenderConf('xhtml', 'code', 'title', 'title');
 
 		// configure textbox (mReschke custom rule)
 		$wiki->setRenderConf('xhtml', 'textbox', 'css', 'textbox');

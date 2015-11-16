@@ -44,4 +44,3 @@ class Text_Wiki_Render_Xhtml_Preformatted extends Text_Wiki_Render {
         return '<pre>'.$text.'</pre>';
     }
 }
-?>

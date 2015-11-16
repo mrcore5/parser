@@ -200,4 +200,3 @@ class Text_Wiki_Parse_Wikilink extends Text_Wiki_Parse {
         return $matches[1] . $this->wiki->addToken($this->rule, $options);
     }
 }
-?>

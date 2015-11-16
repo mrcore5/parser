@@ -110,4 +110,3 @@ class Text_Wiki_Render_Xhtml extends Text_Wiki_Render {
         return $text;
     }
 }
-?>

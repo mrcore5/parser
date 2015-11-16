@@ -215,4 +215,3 @@ class Text_Wiki_Render {
         return htmlspecialchars($text);
     }
 }
-?>

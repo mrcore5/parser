@@ -105,4 +105,3 @@ class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render {
         return "\n$output\n\n";
     }
 }
-?>

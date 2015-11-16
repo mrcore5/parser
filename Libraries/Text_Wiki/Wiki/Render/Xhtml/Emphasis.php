@@ -55,4 +55,3 @@ class Text_Wiki_Render_Xhtml_Emphasis extends Text_Wiki_Render {
         }
     }
 }
-?>

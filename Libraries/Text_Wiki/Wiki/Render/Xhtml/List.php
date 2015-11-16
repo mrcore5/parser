@@ -169,4 +169,3 @@ class Text_Wiki_Render_Xhtml_List extends Text_Wiki_Render {
         }
     }
 }
-?>

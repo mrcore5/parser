@@ -44,4 +44,3 @@ class Text_Wiki_Render_Xhtml_Html extends Text_Wiki_Render {
         return $options['text'];
     }
 }
-?>

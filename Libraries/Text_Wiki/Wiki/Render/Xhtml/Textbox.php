@@ -64,7 +64,7 @@ class Text_Wiki_Render_Xhtml_Textbox extends Text_Wiki_Render {
         if ($title == '') $title = 'Text Snippet';
         if ($height == '') $height = 200;
         $text = "<div$css_outer><span$css_header>$title</span><textarea$css style='height:${height}px;'disabled='disabled'>$text</textarea></div>";
-        #html>\n<div class='textbox_outer'><span class='textbox_header'>$2</span><br /><textarea class='textbox' style='height:$1px;'>\n", $wikiData);        
+        #html>\n<div class='textbox_outer'><span class='textbox_header'>$2</span><br /><textarea class='textbox' style='height:$1px;'>\n", $wikiData);
 
 
 /*
@@ -124,7 +124,7 @@ class Text_Wiki_Render_Xhtml_Textbox extends Text_Wiki_Render {
             $text = str_replace("\t", "    ", $text);
             $text = "<html>\n$text\n</html>";
             $text = $this->textEncode($text);
-            
+
             #mReschke
             #$text = "<pre$css><code$css_html>$text</code></pre>";
             $text = "<div class='pre_outer'><span class='pre_header'>HTML Snippet</span><pre$css><code$css_html>$text</code></pre></div>";
@@ -135,7 +135,7 @@ class Text_Wiki_Render_Xhtml_Textbox extends Text_Wiki_Render {
             // convert entities.
             $text = str_replace("\t", "    ", $text);
             $text = $this->textEncode($text);
-            
+
             #mReschke
             #$text = "<pre$css><code$css_code>$text</code></pre>";
             $text = "<div class='pre_outer'><span class='pre_header'>Code Snippet</span><pre$css><code$css_code>$text</code></pre></div>";
@@ -149,4 +149,3 @@ class Text_Wiki_Render_Xhtml_Textbox extends Text_Wiki_Render {
         return "\n$text\n\n";
     }
 }
-?>

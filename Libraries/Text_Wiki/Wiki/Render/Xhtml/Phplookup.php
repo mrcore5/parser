@@ -78,4 +78,3 @@ class Text_Wiki_Render_Xhtml_Phplookup extends Text_Wiki_Render {
         return $output;
     }
 }
-?>

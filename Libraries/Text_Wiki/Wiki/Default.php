@@ -24,4 +24,5 @@ require_once('Text/Wiki.php');
  * @author     Justin Patrin <justinpatrin@php.net>
  */
 class Text_Wiki_Default extends Text_Wiki {
+    //
 }

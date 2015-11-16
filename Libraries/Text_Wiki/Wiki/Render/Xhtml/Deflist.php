@@ -84,4 +84,3 @@ class Text_Wiki_Render_Xhtml_Deflist extends Text_Wiki_Render {
         }
     }
 }
-?>

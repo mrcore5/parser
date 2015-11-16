@@ -48,5 +48,3 @@ class Text_Wiki_Render_Xhtml_Break extends Text_Wiki_Render {
         return "<br$css />\n";
     }
 }
-
-?>

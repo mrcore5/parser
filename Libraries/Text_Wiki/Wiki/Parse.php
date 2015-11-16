@@ -285,4 +285,3 @@ class Text_Wiki_Parse {
 
     }
 }
-?>

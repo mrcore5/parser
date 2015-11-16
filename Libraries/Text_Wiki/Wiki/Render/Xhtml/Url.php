@@ -108,21 +108,21 @@ class Text_Wiki_Render_Xhtml_Url extends Text_Wiki_Render {
                 $start .= " onclick=\"window.open(this.href, '$target');";
                 $start .= " return false;\"";
             }
-            
+
             if (isset($name)) {
                 $start .= " id=\"$name\"";
             }
 
             // finish up output
             #$start .= ">"; //Original
-            
+
             //mReschke
             if ($isAnchor) {
                 $start .= " onclick='toggle_wiki_headers(false);'>";
             } else {
                 $start .= ">";
             }
-            
+
             $end = "</a>";
 
             // make numbered references look like footnotes when no
@@ -144,4 +144,3 @@ class Text_Wiki_Render_Xhtml_Url extends Text_Wiki_Render {
         return $output;
     }
 }
-?>

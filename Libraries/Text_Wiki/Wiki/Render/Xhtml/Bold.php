@@ -54,4 +54,3 @@ class Text_Wiki_Render_Xhtml_Bold extends Text_Wiki_Render {
         }
     }
 }
-?>

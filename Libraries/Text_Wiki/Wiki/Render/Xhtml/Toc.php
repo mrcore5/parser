@@ -121,4 +121,3 @@ class Text_Wiki_Render_Xhtml_Toc extends Text_Wiki_Render {
         }
     }
 }
-?>

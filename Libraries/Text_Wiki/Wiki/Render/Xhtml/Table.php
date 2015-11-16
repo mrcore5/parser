@@ -91,7 +91,7 @@ $x = '
                 return "</thead></table>\n\n";
             } else {
                 unset($_SESSION['closed_header']);
-                
+
                 /*
                 //Add <tfoot>
                 $return = "</tbody>";
@@ -139,7 +139,7 @@ $x = '
 
             // base html
             $html = $pad . $pad;
-            
+
             // is this a TH or TD cell?
             if ($attr == 'header') {
                 // start a header cell
@@ -188,4 +188,3 @@ $x = '
         }
     }
 }
-?>

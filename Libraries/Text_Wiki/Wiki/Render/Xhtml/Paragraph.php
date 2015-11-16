@@ -56,4 +56,3 @@ class Text_Wiki_Render_Xhtml_Paragraph extends Text_Wiki_Render {
         }
     }
 }
-?>

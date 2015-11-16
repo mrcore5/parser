@@ -1553,5 +1553,3 @@ class Text_Wiki {
         return is_a($obj, 'PEAR_Error');
     }
 }
-
-?>

@@ -245,4 +245,3 @@ class Text_Wiki_Parse_List extends Text_Wiki_Parse {
         return "\n\n" . $return . "\n\n";
     }
 }
-?>
