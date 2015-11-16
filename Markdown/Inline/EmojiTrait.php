@@ -20,7 +20,11 @@ trait EmojiTrait
 				strlen($matches[0])
 			];
 		}
-		return [['text', $markdown[0] . $markdown[1]], 2];
+		if (strlen($markdown) > 1) {
+			return [['text', $markdown[0] . $markdown[1]], 2];
+		} else {
+			return [['text', $markdown[0]], 2];
+		}
 	}
 
 	/**
