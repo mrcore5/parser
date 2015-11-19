@@ -196,9 +196,9 @@ class ParserServiceProvider extends ServiceProvider
 	protected function registerCommands()
 	{
 		if (!$this->app->runningInConsole()) return;
-		$this->commands([
-			\Mrcore\Parser\Console\Commands\AppCommand::class
-		]);
+		#$this->commands([
+		#	\Mrcore\Parser\Console\Commands\AppCommand::class
+		#]);
 	}
 
 	/**
