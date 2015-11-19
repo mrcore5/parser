@@ -102,6 +102,7 @@ Class Wiki extends Parser
 
 		//Pre Parse, comment tags
 		$data = preg_replace('"<#(.*?)>"', "", $data);
+		$data = preg_replace('"<!--(.*?)-->"', "", $data);
 
 		//Pre Parse Remove <auth> if not allowed (pre parse so headers and TOC are removed)
 		if (!$this->isAuthenticated) {
