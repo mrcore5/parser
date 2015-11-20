@@ -14,6 +14,9 @@
 			"email": "mail@mreschke.com"
 		}
 	],
+	"require": {
+		"cebe/markdown": "~1.1"
+	},
 	"autoload": {
 		"classmap": [
 			"TextWiki"
