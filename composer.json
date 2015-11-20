@@ -14,15 +14,13 @@
 			"email": "mail@mreschke.com"
 		}
 	],
-	"require": {
-		"cebe/markdown": "~1.1"
-	},
 	"autoload": {
 		"classmap": [
-			"Libraries"
+			"TextWiki"
 		],
 		"psr-4": {
 			"Mrcore\\Parser\\": ""
 		}
-	}
+	},
+	"minimum-stability": "dev"
 }
