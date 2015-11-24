@@ -3,10 +3,12 @@
 use URL;
 use Layout;
 use Config;
-use Mrcore\Wiki\Support\Crypt;
+use Session;
+use Text_Wiki_Default;
 use Mrcore\Wiki\Models\Post;
+use Mrcore\Wiki\Support\Crypt;
 
-Class Wiki extends Parser
+Class Mrcore extends Parser
 {
 	public $userID;
 	public $postID;
@@ -23,7 +25,8 @@ Class Wiki extends Parser
 		$this->postCreator = 0;
 		$this->isAuthenticated = false;
 		$this->isAdmin = false;
-		$this->disabledRules = array();
+		$this->disabledRules = [];
+		$this->tokens = [];
 	}
 
 	/**
@@ -34,11 +37,206 @@ Class Wiki extends Parser
 	{
 		//Tokens is a multi-dimensional array of items pulled out of the raw wiki usually before parsing, then put back in later
 		//Tokens[0][] is all <php></php> items pulled out, each one is replaced with a [php x] where x is the occurance integer
-		$this->tokens = array();
+		$this->tokens = [];
 
 		$data = $this->preParse($data);
 		$data = $this->wikiParse($data);
 		$data = $this->postParse($data);
+
+		return "<div><div><div><div><div><div>".$data."</div></div></div></div></div></div>";
+	}
+
+	/**
+	 * Parse $data as Text_Wiki mrcore variant
+	 * @param  string $data wiki markup
+	 * @return string parsed xmtl
+	 */
+	protected function wikiParse($data)
+	{
+		// Define mrcore rules
+		// ORDER IS CRITICAL IN THIS ARRAY!
+		// Overrides must have a different name (ie: 2 at the end)
+		$rules = [
+			'Prefilter2',	//mrcore specific customization to existing Text_Wiki rule
+			'Delimeter',	//unchanged original Text_Wiki
+			'Code2',		//mrcore specific customization to existing Text_Wiki rule
+			#'Textbox',		//mrcore only rule - disabled
+			#'Function',	//disabled in mrcore
+			'Html2',		//mrcore specific customization to existing Text_Wiki rule
+			'Raw',			//unchanged original Text_Wiki
+			#'Include',		//disabled in mrcore
+			#'Embed'		//disabled in mrcore
+			'Anchor',		//unchanged original Text_Wiki
+			'Heading2',		//mrcore specific customization to existing Text_Wiki rule
+			'Toc2',			//mrcore specific customization to existing Text_Wiki rule
+			'Horiz',		//unchanged original Text_Wiki
+			'Break',		//unchanged original Text_Wiki
+			'Blockquote',	//unchanged original Text_Wiki
+			'List',			//unchanged original Text_Wiki
+			'Deflist',		//unchanged original Text_Wiki
+			'Table2',		//mrcore specific customization to existing Text_Wiki rule
+			'Image2',		//mrcore specific customization to existing Text_Wiki rule
+			#'Phplookup',	//disabled in mrcore
+			'Center2',		//mrcore specific customization to existing Text_Wiki rule
+			'Newline',		//unchanged original Text_Wiki
+			'Paragraph',	//unchanged original Text_Wiki...touhgh I have a commented out regex
+			'Url2',			//mrcore specific customization to existing Text_Wiki rule
+			'Freelink2',	//mrcore specific customization to existing Text_Wiki rule
+			#'Interwiki',	//disabled in mrcore
+			#'Wikilink2',	//disabled in mrcore
+			'Colortext',	//unchanged original Text_Wiki
+			'Strong',		//unchanged original Text_Wiki
+			'Bold',			//unchanged original Text_Wiki
+			'Emphasis',		//unchanged original Text_Wiki
+			'Italic',		//unchanged original Text_Wiki
+			'Underline',	//unchanged original Text_Wiki
+			'Tt2',			//mrcore specific customization to existing Text_Wiki rule
+			'Superscript',	//unchanged original Text_Wiki
+			'Subscript',	//unchanged original Text_Wiki
+			'Revise',		//unchanged original Text_Wiki
+			'Tighten',		//unchanged original Text_Wiki
+			'Smiley2',		//mrcore only rule
+		];
+
+		/*
+		NOTE
+
+		Prefilter
+			In legacy, I comment out the multi line \ part because in <code> or <cmd>
+			I do a lot of multi line \, and didn't want it combining them..could fix if
+			<code> would jsut ignore \
+
+
+
+		 */
+
+		// Initialize Text_Wiki_Default
+		$wiki = new Text_Wiki_Default($rules);
+		#$wiki->renderingType = 'preg';
+
+		// Add mrcore override paths, must be called Default like parent
+		$wiki->addPath('parse', $wiki->fixPath(dirname(__FILE__)) . 'TextWiki/Parse/Default/');
+		$wiki->addPath('render', $wiki->fixPath(dirname(__FILE__)) . 'TextWiki/Render/');
+
+		// Disable rules in raw mode
+		if (Layout::modeIs('raw')) {
+			$this->disabledRules[] = 'Paragraph';
+			$this->disabledRules[] = 'Newline';
+		}
+
+		// Disable rules after $wiki instantiation
+		// Other inherited classes can append to $this->disabledRules
+		foreach ($this->disabledRules as $disabledRule) {
+			$wiki->deleteRule($disabledRule);
+		}
+
+		$baseURL = "/";
+		$posts = Post::allTitles();
+
+		// configure wikilink
+		// when rendering XHTML, make sure wiki links point to a specific base URL
+		#$wiki->setRenderConf('xhtml', 'wikilink2', 'view_url', $baseURL);
+		#$wiki->setRenderConf('xhtml', 'wikilink2', 'new_url', $baseURL);
+		#$wiki->setRenderConf('xhtml', 'wikilink2', 'pages', $topic_ids);     # for PascalCased article names
+		#$wiki->setRenderConf('xhtml', 'wikilink2', 'css', 'wiki_link');
+		#$wiki->setRenderConf('xhtml', 'wikilink2', 'css_new', 'wiki_link_new');
+		#$wiki->setRenderConf('xhtml', 'wikilink2', 'new_text', '');
+
+		// configure freelink
+		//FreeLink (like ((1)) or ((Some Article)) or ((1|display)) or ((Some Article|display))
+		$wiki->setRenderConf('xhtml', 'freelink2', 'pages', $posts);     # for spaces in article names
+		$wiki->setRenderConf('xhtml', 'freelink2', 'css', 'free_link');
+		$wiki->setRenderConf('xhtml', 'freelink2', 'css_new', 'free_link_new');
+		$wiki->setRenderConf('xhtml', 'freelink2', 'new_text', '');
+		$wiki->setRenderConf('xhtml', 'freelink2', 'new_url', '/edit/newtopic/');
+		# the url when viewing an article
+		$wiki->setRenderConf('xhtml', 'freelink2', 'view_url', $baseURL.'%s');
+		# the url when a link is cliked to make a new article %s is the article name
+		$wiki->setRenderConf('xhtml', 'freelink2', 'new_url', '/post/create?title=%s');
+
+		// configure embed
+		#This allows embeding of PHP documents without parsing them
+		#syntax: [[embed path/to/file.php]]
+		#NOTE: includes cannot have / at the beginning, so make the 'base', '') for root
+		#$wiki->setParseConf('embed', 'base', '');
+		#$wiki->setParseConf('include', 'base', '/');
+
+		// configure toc
+		$wiki->setRenderConf('xhtml', 'toc2', 'div_id', 'toc');
+		$wiki->setRenderConf('xhtml', 'toc2', 'css_list', 'toc');
+		$wiki->setRenderConf('xhtml', 'toc2', 'css_item', 'toc_items');
+		$wiki->setRenderConf('xhtml', 'toc2', 'title', "<div class='panel-heading'><h3 class='panel-title'>Post Content</h3></div>");
+		$wiki->setRenderConf('xhtml', 'toc2', 'collapse', false);
+
+		// configure heading
+		$wiki->setRenderConf('xhtml', 'heading2', 'css_h1', 'heading1');
+		$wiki->setRenderConf('xhtml', 'heading2', 'css_h2', 'heading2');
+		$wiki->setRenderConf('xhtml', 'heading2', 'css_h3', 'heading3');
+		$wiki->setRenderConf('xhtml', 'heading2', 'css_h4', 'heading4');
+		$wiki->setRenderConf('xhtml', 'heading2', 'css_h5', 'heading5');
+		$wiki->setRenderConf('xhtml', 'heading2', 'css_h6', 'heading6');
+
+		// configure blockquote
+		#$wiki->setRenderConf('xhtml', 'blockquote', 'css', 'blockQuote');
+
+		// configure code
+		$wiki->setRenderConf('xhtml', 'code2', 'css', 'abc'); //css class for <pre> around <code>
+		$wiki->setRenderConf('xhtml', 'code2', 'css_code', 'abc'); //css class for <code> inside <pre>
+		$wiki->setRenderConf('xhtml', 'code2', 'css_title', 'abc'); //css or title <div>
+
+		// configure textbox (mReschke custom rule)
+		$wiki->setRenderConf('xhtml', 'textbox', 'css', 'textbox');
+		$wiki->setRenderConf('xhtml', 'textbox', 'css_outer', 'textbox_outer');
+		$wiki->setRenderConf('xhtml', 'textbox', 'css_header', 'textbox_header');
+
+		// configure image
+		$wiki->setRenderConf('xhtml', 'image2', 'base', URL::route('file').'/');
+		$wiki->setRenderConf('xhtml', 'image2', 'css', 'image');
+		$wiki->setRenderConf('xhtml', 'image2', 'css_link', 'image_link');
+
+		// configure table
+		$wiki->setRenderConf('xhtml', 'table2', 'css_table', 'table table-condensed table-bordered table-striped table-hover dataTable');
+		$wiki->setRenderConf('xhtml', 'table2', 'css_table_simple', 'table table-condensed table-bordered table-striped table-hover simpletable');
+		$wiki->setRenderConf('xhtml', 'table2', 'css_tr', 'table_tr');
+		$wiki->setRenderConf('xhtml', 'table2', 'css_th', 'table_th');
+		$wiki->setRenderConf('xhtml', 'table2', 'css_td', 'table_td');
+
+		#Table2
+		#$wiki->setRenderConf('xhtml', 'table2', 'css_table', 'table_table');
+		#$wiki->setRenderConf('xhtml', 'table2', 'css_tr', 'table_tr');
+		#$wiki->setRenderConf('xhtml', 'table2', 'css_th', 'table_th');
+		#$wiki->setRenderConf('xhtml', 'table2', 'css_td', 'table_td');
+
+		// configure url
+		$wiki->setRenderConf('xhtml', 'url2', 'images', false);  #display link, not actual image
+		$wiki->setRenderConf('xhtml', 'url2', 'target', '_blank');
+		$wiki->setRenderConf('xhtml', 'url2', 'css_inline', 'url_link');  #url link CSS when useing just http://...
+		$wiki->setRenderConf('xhtml', 'url2', 'css_descr', 'url_link'); #url link CSS when using [http://... name]
+		#$wiki->setRenderConf('xhtml', 'url2', 'css_img', 'urlLink');  #image link CSS
+		#$wiki->setRenderConf('xhtml', 'url2', 'css_footnote', 'urlLink');
+
+		// tt
+		$wiki->setRenderConf('xhtml', 'tt2', 'use_code', true); //use <code> instead of <tt>
+		#$wiki->setRenderConf('xhtml', 'tt2', 'css', 'text-success');
+
+		// configure smiley (defaults are good here and listed below)
+		#$wiki->setRenderConf('xhtml', 'smiley2', 'prefix', 'images/smileys/icon_');
+		#$wiki->setRenderConf('xhtml', 'smiley2', 'extension', '.png');
+		#$wiki->setRenderConf('xhtml', 'smiley2', 'css', null);
+
+		// Transform
+		return $wiki->transform($data, 'Xhtml');
+
+		// Render
+		#$data = $wiki->transform($data, 'Xhtml');
+		$data = $wiki->render('Xhtml');
+		$text = $wiki->render('Plain');
+
+		// Testing
+		#$data .= "<pre>$text</pre>";
+
+		#$wiki->transform($text);
+		#$render = $wiki->render('Xhtml');
 
 		return $data;
 	}
@@ -328,131 +526,6 @@ Class Wiki extends Parser
 		// Return unparsed included data
 		return $data;
 	}
-
-
-	/**
-	 * Actual text_wiki parsing functions
-	 */
-	private function wikiParse($data)
-	{
-		// Initialize Text_Wiki object with the default rule set
-		$wiki = new \Text_Wiki();
-		$baseURL = "/";
-		$posts = Post::allTitles();
-
-
-		// Enable rules
-		#$wiki->enableRule('embed');
-		#$wiki->enableRule('xhtml');
-		#$wiki->enableRule('html');
-
-		// Disabled Rules
-		$this->disabledRules[] = 'Wikilink'; //PascalCase auto wikilink
-		if (Layout::modeIs('raw')) {
-			$this->disabledRules[] = 'Paragraph';
-			$this->disabledRules[] = 'Newline';
-		}
-		foreach ($this->disabledRules as $disabledRule) {
-			$wiki->disableRule($disabledRule);
-		}
-
-		// configure wikilink
-		// when rendering XHTML, make sure wiki links point to a specific base URL
-		#$wiki->setRenderConf('xhtml', 'wikilink', 'view_url', $baseURL);
-		#$wiki->setRenderConf('xhtml', 'wikilink', 'new_url', $baseURL);
-		#$wiki->setRenderConf('xhtml', 'wikilink', 'pages', $topic_ids);     # for PascalCased article names
-		#$wiki->setRenderConf('xhtml', 'wikilink', 'css', 'wiki_link');
-		#$wiki->setRenderConf('xhtml', 'wikilink', 'css_new', 'wiki_link_new');
-		#$wiki->setRenderConf('xhtml', 'wikilink', 'new_text', '');
-
-
-		// configure freelink
-		//FreeLink (like ((1)) or ((Some Article)) or ((1|display)) or ((Some Article|display))
-		$wiki->setRenderConf('xhtml', 'freelink', 'pages', $posts);     # for spaces in article names
-		$wiki->setRenderConf('xhtml', 'freelink', 'css', 'free_link');
-		$wiki->setRenderConf('xhtml', 'freelink', 'css_new', 'free_link_new');
-		$wiki->setRenderConf('xhtml', 'freelink', 'new_text', '');
-		$wiki->setRenderConf('xhtml', 'freelink', 'new_url', '/edit/newtopic/');
-		# the url when viewing an article
-		$wiki->setRenderConf('xhtml', 'freelink', 'view_url', $baseURL.'%s');
-		# the url when a link is cliked to make a new article %s is the article name
-		$wiki->setRenderConf('xhtml', 'freelink', 'new_url', '/post/create?title=%s');
-
-		// configure embed
-		#This allows embeding of PHP documents without parsing them
-		#syntax: [[embed path/to/file.php]]
-		#NOTE: includes cannot have / at the beginning, so make the 'base', '') for root
-		#$wiki->setParseConf('embed', 'base', '');
-		#$wiki->setParseConf('include', 'base', '/');
-
-		// configure toc
-		$wiki->setRenderConf('xhtml', 'toc', 'div_id', 'toc');
-		$wiki->setRenderConf('xhtml', 'toc', 'css_list', 'toc');
-		$wiki->setRenderConf('xhtml', 'toc', 'css_item', 'toc_items');
-		#$wiki->setRenderConf('xhtml', 'toc', 'title', "<div class='toc_title'>Post Content</div>");
-		$wiki->setRenderConf('xhtml', 'toc', 'title', "<div class='panel-heading'><h3 class='panel-title'>Post Content</h3></div>");
-		$wiki->setRenderConf('xhtml', 'toc', 'collapse', false);
-
-		// configure heading
-		$wiki->setRenderConf('xhtml', 'heading', 'css_h1', 'heading1');
-		$wiki->setRenderConf('xhtml', 'heading', 'css_h2', 'heading2');
-		$wiki->setRenderConf('xhtml', 'heading', 'css_h3', 'heading3');
-		$wiki->setRenderConf('xhtml', 'heading', 'css_h4', 'heading4');
-		$wiki->setRenderConf('xhtml', 'heading', 'css_h5', 'heading5');
-		$wiki->setRenderConf('xhtml', 'heading', 'css_h6', 'heading6');
-
-		// configure blockquote
-		#$wiki->setRenderConf('xhtml', 'blockquote', 'css', 'blockQuote');
-
-		// configure code
-		$wiki->setRenderConf('xhtml', 'code', 'css', 'code');
-		$wiki->setRenderConf('xhtml', 'code', 'title', 'title');
-
-		// configure textbox (mReschke custom rule)
-		$wiki->setRenderConf('xhtml', 'textbox', 'css', 'textbox');
-		$wiki->setRenderConf('xhtml', 'textbox', 'css_outer', 'textbox_outer');
-		$wiki->setRenderConf('xhtml', 'textbox', 'css_header', 'textbox_header');
-
-		// configure image
-		$wiki->setRenderConf('xhtml', 'image', 'base', URL::route('file').'/');
-		$wiki->setRenderConf('xhtml', 'image', 'css', 'image');
-		$wiki->setRenderConf('xhtml', 'image', 'css_link', 'image_link');
-
-		// configure table
-		$wiki->setRenderConf('xhtml', 'table', 'css_table', 'table table-condensed table-bordered table-striped table-hover dataTable');
-		$wiki->setRenderConf('xhtml', 'table', 'css_table_simple', 'table table-condensed table-bordered table-striped table-hover simpletable');
-		$wiki->setRenderConf('xhtml', 'table', 'css_tr', 'table_tr');
-		$wiki->setRenderConf('xhtml', 'table', 'css_th', 'table_th');
-		$wiki->setRenderConf('xhtml', 'table', 'css_td', 'table_td');
-
-		#Table2
-		#$wiki->setRenderConf('xhtml', 'table2', 'css_table', 'table_table');
-		#$wiki->setRenderConf('xhtml', 'table2', 'css_tr', 'table_tr');
-		#$wiki->setRenderConf('xhtml', 'table2', 'css_th', 'table_th');
-		#$wiki->setRenderConf('xhtml', 'table2', 'css_td', 'table_td');
-
-		// configure url
-		$wiki->setRenderConf('xhtml', 'url', 'images', false);  #display link, not actual image
-		$wiki->setRenderConf('xhtml', 'url', 'target', '_blank');
-		$wiki->setRenderConf('xhtml', 'url', 'css_inline', 'url_link');  #url link CSS when useing just http://...
-		$wiki->setRenderConf('xhtml', 'url', 'css_descr', 'url_link'); #url link CSS when using [http://... name]
-		#$wiki->setRenderConf('xhtml', 'url', 'css_img', 'urlLink');  #image link CSS
-		#$wiki->setRenderConf('xhtml', 'url', 'css_footnote', 'urlLink');
-
-		// tt
-		#$wiki->setRenderConf('xhtml', 'tt', 'css', 'label label-default');
-		$wiki->setRenderConf('xhtml', 'tt', 'css', 'text-success');
-
-		// configure smiley (defaults are good here and linsted below)
-		#$wiki->setRenderConf('xhtml', 'smiley', 'prefix', 'images/smileys/icon_');
-		#$wiki->setRenderConf('xhtml', 'smiley', 'extension', '.png');
-		#$wiki->setRenderConf('xhtml', 'smiley', 'css', null);
-
-		// Transform text into XHTML
-		$data = $wiki->transform($data, 'Xhtml');
-		return $data;
-	}
-
 
 	/**
 	 * Post-wikiParse parsing functions

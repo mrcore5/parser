@@ -1,6 +1,6 @@
 <?php namespace Mrcore\Parser;
 
-Class WikiPhp extends WikiHtml
+Class WikiPhp extends Mrcore
 {
 
 	/**
@@ -9,14 +9,11 @@ Class WikiPhp extends WikiHtml
 	 */
 	public function parse($data)
 	{
-		$data = preg_replace('"^<\?php"i', '', $data);
-		$data = preg_replace('"^<\?"i', '', $data);
-		ob_start();
-		eval($data);
-		$data = ob_get_contents();
-		ob_end_clean();
+		// Run data through PHP parser
+		$parser = new Php();
+		$data = $parser->parse($data);
 
-		// Run the evaled php through our wiki parser
+		// Run evaled PHP through mrcore parser
 		return parent::parse($data);
 	}
 

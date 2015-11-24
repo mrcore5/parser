@@ -1,6 +1,6 @@
 <?php namespace Mrcore\Parser;
 
-Class WikiHtml extends Wiki
+Class WikiHtml extends Mrcore
 {
 
 	/**
@@ -9,8 +9,7 @@ Class WikiHtml extends Wiki
 	 */
 	public function parse($data)
 	{
-		#$this->disabledRules = array('Html', 'Newline', 'Paragraph');
-		$this->disabledRules = array('Html');
+		$this->disabledRules[] = 'Html';
 		return parent::parse($data);
 	}
 
