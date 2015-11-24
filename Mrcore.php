@@ -58,7 +58,7 @@ Class Mrcore extends Parser
 		// Overrides must have a different name (ie: 2 at the end)
 		$rules = [
 			'Prefilter2',	//mrcore specific customization to existing Text_Wiki rule
-			'Delimeter',	//unchanged original Text_Wiki
+			'Delimiter',	//unchanged original Text_Wiki
 			'Code2',		//mrcore specific customization to existing Text_Wiki rule
 			#'Textbox',		//mrcore only rule - disabled
 			#'Function',	//disabled in mrcore
