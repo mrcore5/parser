@@ -16,7 +16,7 @@
 	],
 	"require": {
 		"cebe/markdown": "~1.1",
-		"mrcore/text_wiki": "dev-master"
+		"mrcore/text_wiki": "*"
 	},
 	"autoload": {
 		"classmap": [
