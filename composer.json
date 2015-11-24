@@ -25,6 +25,5 @@
 		"psr-4": {
 			"Mrcore\\Parser\\": ""
 		}
-	},
-	"minimum-stability": "dev"
+	}
 }
