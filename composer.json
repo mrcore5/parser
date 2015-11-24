@@ -15,14 +15,16 @@
 		}
 	],
 	"require": {
-		"cebe/markdown": "~1.1"
+		"cebe/markdown": "~1.1",
+		"mrcore/text_wiki": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
-			"Libraries"
+			"TextWiki"
 		],
 		"psr-4": {
 			"Mrcore\\Parser\\": ""
 		}
-	}
+	},
+	"minimum-stability": "dev"
 }
