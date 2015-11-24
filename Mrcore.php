@@ -216,8 +216,8 @@ Class Mrcore extends Parser
 		#$wiki->setRenderConf('xhtml', 'url2', 'css_footnote', 'urlLink');
 
 		// tt
-		$wiki->setRenderConf('xhtml', 'tt2', 'use_code', true); //use <code> instead of <tt>
-		#$wiki->setRenderConf('xhtml', 'tt2', 'css', 'text-success');
+		$wiki->setRenderConf('xhtml', 'tt2', 'use_code', false); //use <code> instead of <tt>
+		$wiki->setRenderConf('xhtml', 'tt2', 'css', 'text-success');
 
 		// configure smiley (defaults are good here and listed below)
 		#$wiki->setRenderConf('xhtml', 'smiley2', 'prefix', 'images/smileys/icon_');
