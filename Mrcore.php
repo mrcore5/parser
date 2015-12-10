@@ -72,7 +72,7 @@ Class Mrcore extends Parser
 			'Horiz',		//unchanged original Text_Wiki
 			'Break',		//unchanged original Text_Wiki
 			'Blockquote',	//unchanged original Text_Wiki
-			'List',			//unchanged original Text_Wiki
+			'List2',		//mrcore specific customization to existing Text_Wiki rule
 			'Deflist',		//unchanged original Text_Wiki
 			'Table2',		//mrcore specific customization to existing Text_Wiki rule
 			'Image2',		//mrcore specific customization to existing Text_Wiki rule
