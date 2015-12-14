@@ -39,9 +39,14 @@ Class Mrcore extends Parser
 		//Tokens[0][] is all <php></php> items pulled out, each one is replaced with a [php x] where x is the occurance integer
 		$this->tokens = [];
 
+		$benchmarkStart = microtime(true);
+
 		$data = $this->preParse($data);
 		$data = $this->wikiParse($data);
 		$data = $this->postParse($data);
+
+		$benchmarkMs = round((microtime(true) - $benchmarkStart) * 1000);
+		dd($benchmarkMs);
 
 		return "<div><div><div><div><div><div>".$data."</div></div></div></div></div></div>";
 	}
@@ -112,7 +117,7 @@ Class Mrcore extends Parser
 
 		// Initialize Text_Wiki_Default
 		$wiki = new Text_Wiki_Default($rules);
-		#$wiki->renderingType = 'preg';
+		$wiki->renderingType = 'preg';
 
 		// Add mrcore override paths, must be called Default like parent
 		$wiki->addPath('parse', $wiki->fixPath(dirname(__FILE__)) . 'TextWiki/Parse/Default/');
