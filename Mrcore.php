@@ -117,7 +117,7 @@ Class Mrcore extends Parser
 
 		// Initialize Text_Wiki_Default
 		$wiki = new Text_Wiki_Default($rules);
-		$wiki->renderingType = 'preg';
+		$wiki->renderingType = 'preg'; //faster, better
 
 		// Add mrcore override paths, must be called Default like parent
 		$wiki->addPath('parse', $wiki->fixPath(dirname(__FILE__)) . 'TextWiki/Parse/Default/');
