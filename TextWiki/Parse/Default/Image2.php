@@ -11,10 +11,10 @@ class Text_Wiki_Parse_Default_Image2 extends Text_Wiki_Parse {
 	var $regex = '/(\[\[image\s+)(.+?)(\]\])/i';
 	var $url = '';
 
-	function Text_Wiki_Parse_Image(&$obj)
+	function __construct(&$obj)
 	{
 		$default = $this->conf;
-		parent::Text_Wiki_Parse($obj);
+		parent::__construct($obj);
 
 		// convert the list of recognized schemes to a regex OR,
 		$schemes = $this->getConf('schemes', $default['schemes']);

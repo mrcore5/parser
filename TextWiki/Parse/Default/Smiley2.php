@@ -452,7 +452,7 @@ class Text_Wiki_Parse_Default_Smiley2 extends Text_Wiki_Parse
 	function __construct(&$obj)
 	{
 		$default = $this->conf;
-		parent::Text_Wiki_Parse($obj);
+		parent::__construct($obj);
 
 		// read the list of smileys to sort out variantes and :xxx: while building the regexp
 		$this->_smileys = $this->getConf('smileys', $default['smileys']);

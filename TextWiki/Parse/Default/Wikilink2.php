@@ -9,7 +9,7 @@ class Text_Wiki_Parse_Default_Wikilink2 extends Text_Wiki_Parse {
 
 	function __construct(&$obj)
 	{
-		parent::Text_Wiki_Parse($obj);
+		parent::__construct($obj);
 
 		if ($this->getConf('utf-8')) {
 			$upper = 'A-Z\p{Lu}';
