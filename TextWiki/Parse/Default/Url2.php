@@ -20,7 +20,7 @@ class Text_Wiki_Parse_Default_Url2 extends Text_Wiki_Parse {
 
 	function __construct(&$obj)
 	{
-		parent::Text_Wiki_Parse($obj);
+		parent::__construct($obj);
 
 		// convert the list of recognized schemes to a regex-safe string,
 		// where the pattern delim is a slash
