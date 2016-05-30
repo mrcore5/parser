@@ -1,4 +1,4 @@
-## Mrcore Parser
+## Mrcore Parser v1.0
 
 This is the mRcore parser module.
 
@@ -16,6 +16,9 @@ See https://github.com/mrcore5/framework for details and installation instructio
 	$parser = new \Mrcore\Parser\Markdown;
 	echo $parser->parse($data);
 
+## Versions
+
+* 1.0 is for Laravel 5.1 and below
 
 ## Contributing
 
