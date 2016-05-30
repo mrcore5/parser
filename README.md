@@ -1,10 +1,10 @@
-## Mrcore Parser v1.0
+## Mrcore Parser v2.0
 
 This is the mRcore parser module.
 
 ## What Is Mrcore
 
-Mrcore is a set of Laravel and Lumen components used to build various systems.
+Mrcore is a set of Laravel components used to build various systems.
 It is a framework, a development platform and a CMS.  It is a modularized version of Laravel
 providing better package development support.  Think of Laravel 4.x workbenches on steroids.
 
@@ -19,6 +19,7 @@ See https://github.com/mrcore5/framework for details and installation instructio
 ## Versions
 
 * 1.0 is for Laravel 5.1 and below
+* 2.0 is for Laravel 5.2 and above
 
 ## Contributing
 
