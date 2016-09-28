@@ -35,7 +35,8 @@
 *
 */
 
-class Text_Wiki_Parse_Deflist extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Deflist extends Text_Wiki_Parse
+{
 
 
     /**
@@ -51,7 +52,7 @@ class Text_Wiki_Parse_Deflist extends Text_Wiki_Parse {
     *
     */
 
-    var $regex = '/\n((: ).*\n)(?!(: |\n))/Us';
+    public $regex = '/\n((: ).*\n)(?!(: |\n))/Us';
 
 
     /**
@@ -76,7 +77,7 @@ class Text_Wiki_Parse_Deflist extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         // the replacement text we will return to parse()
         $return = '';

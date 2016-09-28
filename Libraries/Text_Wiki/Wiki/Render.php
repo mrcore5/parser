@@ -23,7 +23,8 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render {
+class Text_Wiki_Render
+{
 
 
     /**
@@ -36,7 +37,7 @@ class Text_Wiki_Render {
     *
     */
 
-    var $conf = array();
+    public $conf = array();
 
 
     /**
@@ -49,7 +50,7 @@ class Text_Wiki_Render {
     *
     */
 
-    var $format = null;
+    public $format = null;
 
 
     /**
@@ -62,7 +63,7 @@ class Text_Wiki_Render {
     *
     */
 
-    var $rule = null;
+    public $rule = null;
 
 
     /**
@@ -77,7 +78,7 @@ class Text_Wiki_Render {
     * @var object
     */
 
-    var $wiki = null;
+    public $wiki = null;
 
 
     /**
@@ -90,7 +91,7 @@ class Text_Wiki_Render {
     *
     */
 
-    function Text_Wiki_Render(&$obj)
+    public function Text_Wiki_Render(&$obj)
     {
         // keep a reference to the calling Text_Wiki object
         $this->wiki =& $obj;
@@ -119,7 +120,6 @@ class Text_Wiki_Render {
                 $this->conf,
                 $this->wiki->formatConf[$this->format]
             );
-
         }
 
         // is there a format and a rule?
@@ -152,7 +152,7 @@ class Text_Wiki_Render {
     *
     */
 
-    function getConf($key, $default = null)
+    public function getConf($key, $default = null)
     {
         if (isset($this->conf[$key])) {
             return $this->conf[$key];
@@ -177,7 +177,7 @@ class Text_Wiki_Render {
     *
     */
 
-    function formatConf($format, $key)
+    public function formatConf($format, $key)
     {
         if (isset($this->conf[$key])) {
             //$this->conf[$key] needs a textEncode....at least for Xhtml output...
@@ -196,7 +196,7 @@ class Text_Wiki_Render {
     *
     */
 
-    function urlEncode($urlChunk)
+    public function urlEncode($urlChunk)
     {
         return rawurlencode($urlChunk);
     }
@@ -210,7 +210,7 @@ class Text_Wiki_Render {
     *
     */
 
-    function textEncode($text)
+    public function textEncode($text)
     {
         return htmlspecialchars($text);
     }

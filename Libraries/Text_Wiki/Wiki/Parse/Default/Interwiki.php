@@ -31,10 +31,11 @@
 *
 */
 
-class Text_Wiki_Parse_Interwiki extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Interwiki extends Text_Wiki_Parse
+{
 
     // double-colons wont trip up now
-    var $regex = '([A-Za-z0-9_]+):((?!:)[A-Za-z0-9_\/=&~#.:;-]+)';
+    public $regex = '([A-Za-z0-9_]+):((?!:)[A-Za-z0-9_\/=&~#.:;-]+)';
 
 
     /**
@@ -48,7 +49,7 @@ class Text_Wiki_Parse_Interwiki extends Text_Wiki_Parse {
     *
     */
 
-    function parse()
+    public function parse()
     {
         // described interwiki links
         $tmp_regex = '/\[' . $this->regex . ' (.+?)\]/';
@@ -65,8 +66,6 @@ class Text_Wiki_Parse_Interwiki extends Text_Wiki_Parse {
             array(&$this, 'process'),
             $this->wiki->source
         );
-
-
     }
 
 
@@ -91,7 +90,7 @@ class Text_Wiki_Parse_Interwiki extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         $options = array(
             'site' => $matches[1],
@@ -124,7 +123,7 @@ class Text_Wiki_Parse_Interwiki extends Text_Wiki_Parse {
     *
     */
 
-    function processDescr(&$matches)
+    public function processDescr(&$matches)
     {
         $options = array(
             'site' => $matches[1],

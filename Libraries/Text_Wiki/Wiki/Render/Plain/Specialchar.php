@@ -25,9 +25,9 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Plain_SpecialChar extends Text_Wiki_Render {
-
-    var $types = array('~bs~' => '\\',
+class Text_Wiki_Render_Plain_SpecialChar extends Text_Wiki_Render
+{
+    public $types = array('~bs~' => '\\',
                        '~hs~' => ' ',
                        '~amp~' => '&',
                        '~ldq~' => '"',
@@ -41,7 +41,7 @@ class Text_Wiki_Render_Plain_SpecialChar extends Text_Wiki_Render {
                        '~lt~' => '<',
                        '~gt~' => '>');
 
-    function token($options)
+    public function token($options)
     {
         if (isset($this->types[$options['char']])) {
             return $this->types[$options['char']];
@@ -50,5 +50,3 @@ class Text_Wiki_Render_Plain_SpecialChar extends Text_Wiki_Render {
         }
     }
 }
-
-?>

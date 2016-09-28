@@ -38,17 +38,17 @@
 *
 */
 
-class Text_Wiki_Parse_Include extends Text_Wiki_Parse {
-
-    var $conf = array(
+class Text_Wiki_Parse_Include extends Text_Wiki_Parse
+{
+    public $conf = array(
         'base' => '/path/to/scripts/'
     );
 
-    var $file = null;
+    public $file = null;
 
-    var $output = null;
+    public $output = null;
 
-    var $vars = null;
+    public $vars = null;
 
     /**
     *
@@ -61,7 +61,7 @@ class Text_Wiki_Parse_Include extends Text_Wiki_Parse {
     *
     */
 
-    var $regex = '/(\[\[include )(.+?)( .+?)?(\]\])/i';
+    public $regex = '/(\[\[include )(.+?)( .+?)?(\]\])/i';
 
 
     /**
@@ -77,7 +77,7 @@ class Text_Wiki_Parse_Include extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         // save the file location
         $this->file = $this->getConf('base', './') . $matches[2];

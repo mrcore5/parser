@@ -25,9 +25,9 @@
  */
 
 
-class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
-
-    var $conf = array(
+class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render
+{
+    public $conf = array(
         'base' => '/',
         'url_base' => null,
         'css'  => null,
@@ -48,7 +48,7 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         // note the image source
         $src = $options['src'];
@@ -57,8 +57,7 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
         // is the source a local file or URL?
         if (preg_match('"local:/"', $src)) {
             $src = substr($src, 6);
-
-        }elseif (strpos($src, '://') === false) {
+        } elseif (strpos($src, '://') === false) {
             $postID = \Mrcore::post()->id();
             $src = preg_replace('"^files"i', '', $src);
             $src = preg_replace('"^file"i', '', $src);
@@ -66,7 +65,9 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
             if (substr($src, 0, 1) == '/') {
                 $src = substr($src, 1);
             } else {
-                if (!preg_match('"#"', $src)) $src = '#/'.$src;
+                if (!preg_match('"#"', $src)) {
+                    $src = '#/'.$src;
+                }
             }
             $src = preg_replace('"#"', $postID, $src);
 
@@ -88,10 +89,12 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
                 #mReschke Addition for link="local:/somepage"
                 $href = $options['attr']['link'];
                 $local = false;
-                if (preg_match('"^local"', $href)) $local = true;
+                if (preg_match('"^local"', $href)) {
+                    $local = true;
+                }
                 $href = preg_replace('"^local:"i', '', $href);
 
-                $standardizePath = function($path) use($local)  {
+                $standardizePath = function ($path) use ($local) {
                     if ($path) {
                         if (substr($path, 0, 1) != '/') {
                             $path = preg_replace('"#/"', '', $path);
@@ -104,9 +107,10 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
                     }
                     if ($local) {
                         return $path;
-
                     } else {
-                        if (substr($path, 0, 1) == '/') $path = substr($path, 1);
+                        if (substr($path, 0, 1) == '/') {
+                            $path = substr($path, 1);
+                        }
                         return $this->getConf('base', '/').$path;
                     }
                 };
@@ -167,10 +171,10 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
                 // is a URL link
                 $imageFile = $src;
             } elseif ($src[0] == '.') {
-            	// reg at dav-muz dot net -- 2005-03-07
-				// is a local file on relative path.
-				$imageFile = $src; # ...don't do anything because it's perfect!
-			} else {
+                // reg at dav-muz dot net -- 2005-03-07
+                // is a local file on relative path.
+                $imageFile = $src; # ...don't do anything because it's perfect!
+            } else {
                 // is a local file on absolute path.
                 $imageFile = Config::WEB_BASE_IMAGE_URL.$src;
             }

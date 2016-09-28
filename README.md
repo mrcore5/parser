@@ -13,8 +13,8 @@ See https://github.com/mrcore5/framework for details and installation instructio
 ## Official Documentation
 
 
-	$parser = new \Mrcore\Parser\Markdown;
-	echo $parser->parse($data);
+    $parser = new \Mrcore\Parser\Markdown;
+    echo $parser->parse($data);
 
 ## Versions
 

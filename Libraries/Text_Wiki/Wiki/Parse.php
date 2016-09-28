@@ -37,7 +37,8 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Parse {
+class Text_Wiki_Parse
+{
 
 
     /**
@@ -50,7 +51,7 @@ class Text_Wiki_Parse {
     *
     */
 
-    var $conf = array();
+    public $conf = array();
 
 
     /**
@@ -65,7 +66,7 @@ class Text_Wiki_Parse {
     *
     */
 
-    var $regex = null;
+    public $regex = null;
 
 
     /**
@@ -78,7 +79,7 @@ class Text_Wiki_Parse {
     *
     */
 
-    var $rule = null;
+    public $rule = null;
 
 
     /**
@@ -93,7 +94,7 @@ class Text_Wiki_Parse {
     * @var object
     */
 
-    var $wiki = null;
+    public $wiki = null;
 
 
     /**
@@ -106,7 +107,7 @@ class Text_Wiki_Parse {
     *
     */
 
-    function Text_Wiki_Parse(&$obj)
+    public function Text_Wiki_Parse(&$obj)
     {
         // set the reference to the calling Text_Wiki object;
         // this allows us access to the shared source text, token
@@ -123,12 +124,10 @@ class Text_Wiki_Parse {
         // override config options for the rule if specified
         if (isset($this->wiki->parseConf[$this->rule]) &&
             is_array($this->wiki->parseConf[$this->rule])) {
-
             $this->conf = array_merge(
                 $this->conf,
                 $this->wiki->parseConf[$this->rule]
             );
-
         }
     }
 
@@ -147,7 +146,7 @@ class Text_Wiki_Parse {
     *
     */
 
-    function parse()
+    public function parse()
     {
         #mReschke this is the main parse regex, takes regex from the Parse/Default/xxx.php file
         #This was failing on large <code> blocks, until I fixed the regex!
@@ -159,22 +158,17 @@ class Text_Wiki_Parse {
         #mReschke show parse errors
         if (preg_last_error()) {
             if (preg_last_error() == PREG_NO_ERROR) {
-                var_dump( 'There is no error.' );
-            }
-            else if (preg_last_error() == PREG_INTERNAL_ERROR) {
-                var_dump( 'There is an internal error!' );
-            }
-            else if (preg_last_error() == PREG_BACKTRACK_LIMIT_ERROR) {
-                var_dump( 'Backtrack limit was exhausted!' );
-            }
-            else if (preg_last_error() == PREG_RECURSION_LIMIT_ERROR) {
-                var_dump( 'Recursion limit was exhausted!' );
-            }
-            else if (preg_last_error() == PREG_BAD_UTF8_ERROR) {
-                var_dump( 'Bad UTF8 error!' );
-            }
-            else if (preg_last_error() == PREG_BAD_UTF8_ERROR) {
-                var_dump( 'Bad UTF8 offset error!' );
+                var_dump('There is no error.');
+            } elseif (preg_last_error() == PREG_INTERNAL_ERROR) {
+                var_dump('There is an internal error!');
+            } elseif (preg_last_error() == PREG_BACKTRACK_LIMIT_ERROR) {
+                var_dump('Backtrack limit was exhausted!');
+            } elseif (preg_last_error() == PREG_RECURSION_LIMIT_ERROR) {
+                var_dump('Recursion limit was exhausted!');
+            } elseif (preg_last_error() == PREG_BAD_UTF8_ERROR) {
+                var_dump('Bad UTF8 error!');
+            } elseif (preg_last_error() == PREG_BAD_UTF8_ERROR) {
+                var_dump('Bad UTF8 offset error!');
             }
             #trigger_error("preg: ".preg_last_error());
         }
@@ -199,7 +193,7 @@ class Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         return $matches[0];
     }
@@ -221,7 +215,7 @@ class Text_Wiki_Parse {
     *
     */
 
-    function getConf($key, $default = null)
+    public function getConf($key, $default = null)
     {
         if (isset($this->conf[$key])) {
             return $this->conf[$key];
@@ -253,7 +247,7 @@ class Text_Wiki_Parse {
     *
     */
 
-    function getAttrs($text)
+    public function getAttrs($text)
     {
         // find the =" sections;
         $tmp = explode('="', trim($text));
@@ -278,10 +272,8 @@ class Text_Wiki_Parse {
             $pos = strrpos($val, '"');
             $attrs[$key] = stripslashes(substr($val, 0, $pos));
             $key = trim(substr($val, $pos+1));
-
         }
 
         return $attrs;
-
     }
 }

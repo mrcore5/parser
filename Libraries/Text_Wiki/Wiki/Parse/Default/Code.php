@@ -35,7 +35,8 @@
 *
 */
 
-class Text_Wiki_Parse_Code extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Code extends Text_Wiki_Parse
+{
     /**
     *
     * The regular expression used to find source text matching this
@@ -62,7 +63,7 @@ class Text_Wiki_Parse_Code extends Text_Wiki_Parse {
     #Perfect!!
     #mReschke 2010-10-28
     #var $regex = ';\n<code(\s[^>]*)?xxxxxxxxxxx>\n?((?:[^<]*(?R)?.*?)*?)</code>;msi'; #BEAUTIFUL!!
-    var $regex = ';<code(\s[^>]*)?>\n?((?:[^<]*(?R)?.*?)*?)</code>;msi'; #BEAUTIFUL!!
+    public $regex = ';<code(\s[^>]*)?>\n?((?:[^<]*(?R)?.*?)*?)</code>;msi'; #BEAUTIFUL!!
 
 
     /**
@@ -80,7 +81,7 @@ class Text_Wiki_Parse_Code extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         #exit("XX");
         // are there additional attribute arguments?
@@ -92,15 +93,15 @@ class Text_Wiki_Parse_Code extends Text_Wiki_Parse {
                 'attr' => array('type' => '')
             );
         } else {
-        	// get the attributes...
-        	$attr = $this->getAttrs($args);
+            // get the attributes...
+            $attr = $this->getAttrs($args);
 
-        	// ... and make sure we have a 'type'
-        	if (! isset($attr['type'])) {
-        		$attr['type'] = '';
-        	}
+            // ... and make sure we have a 'type'
+            if (! isset($attr['type'])) {
+                $attr['type'] = '';
+            }
 
-        	// retain the options
+            // retain the options
             $options = array(
                 'text' => $matches[2],
                 'attr' => $attr

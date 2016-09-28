@@ -35,7 +35,8 @@
 *
 */
 
-class Text_Wiki_Parse_Textbox extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Textbox extends Text_Wiki_Parse
+{
 
 
     /**
@@ -51,7 +52,7 @@ class Text_Wiki_Parse_Textbox extends Text_Wiki_Parse {
 
 /*    var $regex = '/^(\<textbox( .+)?\>)\n(.+)\n(\<\/textbox\>)(\s|$)/Umsi';*/
     #var $regex = ';^<textbox(\s[^>]*)? >((?:(?R)|.*?)*)\n</textbox>(\s|$);msi';
-	var $regex = ';\n<textbox(\s[^>]*)?>\n?((?:[^<]*(?R)?.*?)*?)</textbox>;msi'; #BEAUTIFUL!!
+    public $regex = ';\n<textbox(\s[^>]*)?>\n?((?:[^<]*(?R)?.*?)*?)</textbox>;msi'; #BEAUTIFUL!!
     /**
     *
     * Generates a token entry for the matched text.  Token options are:
@@ -67,7 +68,7 @@ class Text_Wiki_Parse_Textbox extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         // are there additional attribute arguments?
         $args = trim($matches[1]);
@@ -78,15 +79,15 @@ class Text_Wiki_Parse_Textbox extends Text_Wiki_Parse {
                 'attr' => array('type' => '')
             );
         } else {
-        	// get the attributes...
-        	$attr = $this->getAttrs($args);
+            // get the attributes...
+            $attr = $this->getAttrs($args);
 
-        	// ... and make sure we have a 'type'
-        	if (! isset($attr['type'])) {
-        		$attr['type'] = '';
-        	}
+            // ... and make sure we have a 'type'
+            if (! isset($attr['type'])) {
+                $attr['type'] = '';
+            }
 
-        	// retain the options
+            // retain the options
             $options = array(
                 'text' => $matches[2],
                 'attr' => $attr

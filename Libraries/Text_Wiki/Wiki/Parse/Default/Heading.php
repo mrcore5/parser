@@ -34,7 +34,8 @@
 *
 */
 
-class Text_Wiki_Parse_Heading extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Heading extends Text_Wiki_Parse
+{
 
 
     /**
@@ -54,7 +55,7 @@ class Text_Wiki_Parse_Heading extends Text_Wiki_Parse {
     //a end </+> to know what the header content is, so I now revert back to the original
     //+ headers, but add custom code to the Render Heading.php page to keep track of header content
 
-    var $regex = '/^(\+{1,6}) (.*)/m'; #Original Text_Wiki
+    public $regex = '/^(\+{1,6}) (.*)/m'; #Original Text_Wiki
 
     #This one uses <+ headerhere>...</+> so that header content can be enclosed into divs
     #Note I replace any </+> or </++...> in my own post parser.class.php file with a simple </div>
@@ -62,7 +63,7 @@ class Text_Wiki_Parse_Heading extends Text_Wiki_Parse {
     #var $regex = '/^(<[\+|=]{1,6})(.*)>/m'; #mReschke version can be <=..> or <+..>
     #var $regex = '/^([\+|=]{1,6})(.*)/m'; #mReschke version can be =.. or +
 
-    var $conf = array(
+    public $conf = array(
         'id_prefix' => 'toc'
     );
 
@@ -82,7 +83,7 @@ class Text_Wiki_Parse_Heading extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         #var_dump($matches);
         // keep a running count for header IDs.  we use this later

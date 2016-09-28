@@ -23,9 +23,9 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Xhtml_Center extends Text_Wiki_Render {
-
-    var $conf = array(
+class Text_Wiki_Render_Xhtml_Center extends Text_Wiki_Render
+{
+    public $conf = array(
         'css' => null
     );
 
@@ -42,14 +42,13 @@ class Text_Wiki_Render_Xhtml_Center extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         if ($options['type'] == 'start') {
             $css = $this->getConf('css');
             if ($css) {
                 return "<div class=\"$css\">";
-            }
-            else {
+            } else {
                 return '<div style="text-align: center;">';
             }
         }

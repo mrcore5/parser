@@ -23,8 +23,9 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Xhtml_Include extends Text_Wiki_Render {
-    function token()
+class Text_Wiki_Render_Xhtml_Include extends Text_Wiki_Render
+{
+    public function token()
     {
         return '';
     }

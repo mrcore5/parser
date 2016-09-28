@@ -33,7 +33,8 @@
 *
 */
 
-class Text_Wiki_Parse_Blockquote extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Blockquote extends Text_Wiki_Parse
+{
 
 
     /**
@@ -48,7 +49,7 @@ class Text_Wiki_Parse_Blockquote extends Text_Wiki_Parse {
     *
     */
 
-    var $regex = '/\n((\>).*\n)(?!(\>))/Us';
+    public $regex = '/\n((\>).*\n)(?!(\>))/Us';
 
 
     /**
@@ -73,7 +74,7 @@ class Text_Wiki_Parse_Blockquote extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         // the replacement text we will return to parse()
         $return = "\n";
@@ -137,7 +138,7 @@ class Text_Wiki_Parse_Blockquote extends Text_Wiki_Parse {
 
                 $return .= $this->wiki->addToken(
                     $this->rule,
-                    array (
+                    array(
                         'type' => 'end',
                         'level' => $curLevel
                     )
@@ -162,7 +163,7 @@ class Text_Wiki_Parse_Blockquote extends Text_Wiki_Parse {
         while ($curLevel > 0) {
             $return .= $this->wiki->addToken(
                 $this->rule,
-                array (
+                array(
                     'type' => 'end',
                     'level' => $curLevel
                 )

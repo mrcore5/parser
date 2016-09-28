@@ -36,7 +36,8 @@
 *
 */
 
-class Text_Wiki_Parse_List extends Text_Wiki_Parse {
+class Text_Wiki_Parse_List extends Text_Wiki_Parse
+{
 
 
     /**
@@ -52,7 +53,7 @@ class Text_Wiki_Parse_List extends Text_Wiki_Parse {
     *
     */
 
-    var $regex = '/^((\*|#) .*\n)(?!\2 |(?: {1,}((?:\*|#) |\n)))/Usm';
+    public $regex = '/^((\*|#) .*\n)(?!\2 |(?: {1,}((?:\*|#) |\n)))/Usm';
 
 
     /**
@@ -83,7 +84,7 @@ class Text_Wiki_Parse_List extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         // the replacement text we will return
         $return = '';
@@ -170,7 +171,7 @@ class Text_Wiki_Parse_List extends Text_Wiki_Parse {
                 // and the indent level are the same.
                 $return .= $this->wiki->addToken(
                     $this->rule,
-                    array (
+                    array(
                         'type' => array_pop($stack) . '_list_end',
                         'level' => $tmp
                     )
@@ -234,7 +235,7 @@ class Text_Wiki_Parse_List extends Text_Wiki_Parse {
         while (count($stack) > 0) {
             $return .= $this->wiki->addToken(
                 $this->rule,
-                array (
+                array(
                     'type' => array_pop($stack) . '_list_end',
                     'level' => count($stack)
                 )

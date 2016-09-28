@@ -30,7 +30,8 @@
  * @link       http://pear.php.net/package/Text_Wiki
  * @see        Text_Wiki_Parse::Text_Wiki_Parse()
  */
-class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse
+{
 
     /**
      * Configuration keys for this rule
@@ -50,7 +51,7 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
 
     // These are the mrcore default but you CAN overwrite them and append to them
     // Just specify a <phpw> tag in your global mrcore topic and global $global_smileys and $global_smileys = array(':)' => array ('smile', 'Smile', '(:'))...
-    var $conf = array(
+    public $conf = array(
         'smileys' => array(
             ':D'             => array('biggrin', 'Very Happy', ':grin:'),
             ':)'             => array('smile', 'Smile', '(:'),
@@ -137,7 +138,7 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
             ':i3:'           => array('idea3', 'Idea', ':idea3:', ':iii:'),
             ':hi3:'          => array('idea3_h', 'Idea', ':hidea3:', ':hiii:'),
 
-		':fixme:'        => array('fixme', 'Fixme'),
+        ':fixme:'        => array('fixme', 'Fixme'),
             ':hfixme:'       => array('fixme_h', 'Fixme'),
             ':fixme2:'       => array('fixme2', 'Fixme'),
             ':hfixme2:'      => array('fixme2_h', 'Fixme'),
@@ -505,7 +506,7 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
      * @access private
      * @var array 'config-key' => mixed config-value
      */
-    var $_smileys = array();
+    public $_smileys = array();
 
      /**
      * Constructor.
@@ -515,7 +516,7 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
      * @return The parser object
      * @access public
      */
-    function Text_Wiki_Parse_Smiley(&$obj)
+    public function Text_Wiki_Parse_Smiley(&$obj)
     {
         $default = $this->conf;
         parent::Text_Wiki_Parse($obj);
@@ -549,7 +550,8 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
                     continue;
                 }
                 if ($autoNose && ($len === 2)) {
-                    $variante = $cur{0} . '-' . $cur{1};
+                    $variante = $cur{0}
+                    . '-' . $cur{1};
                     $this->_smileys[$variante] = &$this->_smileys[$smiley];
                     $cur = preg_quote($cur{0}, '#') . '-?' . preg_quote($cur{1}, '#');
                 } else {
@@ -576,7 +578,7 @@ class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {
      * @return string Delimited token representing the smiley
      * @access public
      */
-    function process(&$matches)
+    public function process(&$matches)
     {
         // tokenize
         return $this->wiki->addToken($this->rule,

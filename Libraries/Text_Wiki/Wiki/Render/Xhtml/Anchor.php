@@ -23,13 +23,13 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Xhtml_Anchor extends Text_Wiki_Render {
-
-    var $conf = array(
+class Text_Wiki_Render_Xhtml_Anchor extends Text_Wiki_Render
+{
+    public $conf = array(
         'css' => null
     );
 
-    function token($options)
+    public function token($options)
     {
         extract($options); // $type, $name
 

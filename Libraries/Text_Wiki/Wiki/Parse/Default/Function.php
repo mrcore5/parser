@@ -28,11 +28,11 @@
 *
 */
 
-class Text_Wiki_Parse_Function extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Function extends Text_Wiki_Parse
+{
+    public $regex = '/^(\<function\>)\n(.+)\n(\<\/function\>)(\s|$)/Umsi';
 
-    var $regex = '/^(\<function\>)\n(.+)\n(\<\/function\>)(\s|$)/Umsi';
-
-    function process(&$matches)
+    public function process(&$matches)
     {
         // default options
         $opts = array(
@@ -66,7 +66,7 @@ class Text_Wiki_Parse_Function extends Text_Wiki_Parse {
             $type = trim(substr($line, 0, $pos));
             $val = trim(substr($line, $pos+1));
 
-            switch($type) {
+            switch ($type) {
 
             case 'a':
             case 'access':

@@ -23,9 +23,9 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Xhtml_List extends Text_Wiki_Render {
-
-    var $conf = array(
+class Text_Wiki_Render_Xhtml_List extends Text_Wiki_Render
+{
+    public $conf = array(
         'css_ol' => null,
         'css_ol_li' => null,
         'css_ul' => null,
@@ -48,7 +48,7 @@ class Text_Wiki_Render_Xhtml_List extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         // make nice variables (type, level, count)
         extract($options);
@@ -98,7 +98,7 @@ class Text_Wiki_Render_Xhtml_List extends Text_Wiki_Render {
         case 'number_list_start':
             if (isset($format)) {
                 $format = ' type="' . $format . '"';
-            } else  {
+            } else {
                 $format = '';
             }
             // build the base HTML

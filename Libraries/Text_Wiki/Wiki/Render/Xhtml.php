@@ -23,20 +23,20 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Xhtml extends Text_Wiki_Render {
-
-    var $conf = array(
-    	'translate' => HTML_ENTITIES, #mReschke, default was HTML_ENTITIES, I removed so it will render plain html tags
-    	'quotes'    => ENT_COMPAT,
-    	'charset'   => 'ISO-8859-1'
+class Text_Wiki_Render_Xhtml extends Text_Wiki_Render
+{
+    public $conf = array(
+        'translate' => HTML_ENTITIES, #mReschke, default was HTML_ENTITIES, I removed so it will render plain html tags
+        'quotes'    => ENT_COMPAT,
+        'charset'   => 'ISO-8859-1'
     );
 
-    function pre()
+    public function pre()
     {
         $this->wiki->source = $this->textEncode($this->wiki->source);
     }
 
-    function post()
+    public function post()
     {
         return;
     }
@@ -51,7 +51,7 @@ class Text_Wiki_Render_Xhtml extends Text_Wiki_Render {
     *
     */
 
-    function textEncode($text)
+    public function textEncode($text)
     {
         // attempt to translate HTML entities in the source.
         // get the config options.
@@ -61,52 +61,51 @@ class Text_Wiki_Render_Xhtml extends Text_Wiki_Render {
 
         # mReschke
         if (Mrcore::post()->formatConstant() == 'htmlw' || Mrcore::post()->formatConstant() == 'phpw') {
-        	// Ignore all html entities, this allow us to use inline html
+            // Ignore all html entities, this allow us to use inline html
         } else {
 
-	        // have to check null and false because HTML_ENTITIES is a zero
-	        if ($type === HTML_ENTITIES) {
+            // have to check null and false because HTML_ENTITIES is a zero
+            if ($type === HTML_ENTITIES) {
 
-				// keep a copy of the translated version of the delimiter
-				// so we can convert it back.
-				$new_delim = htmlentities($this->wiki->delim, $quotes, $charset);
+                // keep a copy of the translated version of the delimiter
+                // so we can convert it back.
+                $new_delim = htmlentities($this->wiki->delim, $quotes, $charset);
 
-				// convert the entities.  we silence the call here so that
-				// errors about charsets don't pop up, per counsel from
-				// Jan at Horde.  (http://pear.php.net/bugs/bug.php?id=4474)
-				$text = @htmlentities(
-					$text,
-					$quotes,
-					$charset
-				);
+                // convert the entities.  we silence the call here so that
+                // errors about charsets don't pop up, per counsel from
+                // Jan at Horde.  (http://pear.php.net/bugs/bug.php?id=4474)
+                $text = @htmlentities(
+                    $text,
+                    $quotes,
+                    $charset
+                );
 
-				// re-convert the delimiter
-				$text = str_replace(
-					$new_delim, $this->wiki->delim, $text
-				);
+                // re-convert the delimiter
+                $text = str_replace(
+                    $new_delim, $this->wiki->delim, $text
+                );
+            } elseif ($type === HTML_SPECIALCHARS) {
 
-			} elseif ($type === HTML_SPECIALCHARS) {
+                // keep a copy of the translated version of the delimiter
+                // so we can convert it back.
+                $new_delim = htmlspecialchars($this->wiki->delim, $quotes,
+                    $charset);
 
-				// keep a copy of the translated version of the delimiter
-				// so we can convert it back.
-				$new_delim = htmlspecialchars($this->wiki->delim, $quotes,
-				    $charset);
+                // convert the entities.  we silence the call here so that
+                // errors about charsets don't pop up, per counsel from
+                // Jan at Horde.  (http://pear.php.net/bugs/bug.php?id=4474)
+                $text = @htmlspecialchars(
+                    $text,
+                    $quotes,
+                    $charset
+                );
 
-				// convert the entities.  we silence the call here so that
-				// errors about charsets don't pop up, per counsel from
-				// Jan at Horde.  (http://pear.php.net/bugs/bug.php?id=4474)
-				$text = @htmlspecialchars(
-					$text,
-					$quotes,
-					$charset
-				);
-
-				// re-convert the delimiter
-				$text = str_replace(
-					$new_delim, $this->wiki->delim, $text
-				);
-			}
-		}
+                // re-convert the delimiter
+                $text = str_replace(
+                    $new_delim, $this->wiki->delim, $text
+                );
+            }
+        }
         return $text;
     }
 }

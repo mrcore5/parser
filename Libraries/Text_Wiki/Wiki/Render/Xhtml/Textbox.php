@@ -23,9 +23,9 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki and http://mreschke.com/topic/205
  */
-class Text_Wiki_Render_Xhtml_Textbox extends Text_Wiki_Render {
-
-    var $conf = array(
+class Text_Wiki_Render_Xhtml_Textbox extends Text_Wiki_Render
+{
+    public $conf = array(
         'css'      => null, // class for <pre>
         'css_outer' => null, // class for outer div
         'css_header'  => null, // class for header span
@@ -46,7 +46,7 @@ class Text_Wiki_Render_Xhtml_Textbox extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         $text = $options['text'];
         $attr = $options['attr'];
@@ -61,8 +61,12 @@ class Text_Wiki_Render_Xhtml_Textbox extends Text_Wiki_Render {
 
 
         $text = $this->textEncode($text);
-        if ($title == '') $title = 'Text Snippet';
-        if ($height == '') $height = 200;
+        if ($title == '') {
+            $title = 'Text Snippet';
+        }
+        if ($height == '') {
+            $height = 200;
+        }
         $text = "<div$css_outer><span$css_header>$title</span><textarea$css style='height:${height}px;'disabled='disabled'>$text</textarea></div>";
         #html>\n<div class='textbox_outer'><span class='textbox_header'>$2</span><br /><textarea class='textbox' style='height:$1px;'>\n", $wikiData);
 

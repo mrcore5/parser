@@ -34,7 +34,8 @@
 *
 */
 
-class Text_Wiki_Parse_Table extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Table extends Text_Wiki_Parse
+{
 
 
     /**
@@ -50,7 +51,7 @@ class Text_Wiki_Parse_Table extends Text_Wiki_Parse {
     *
     */
 
-    var $regex = '/\n((\|\|).*)(\n)(?!(\|\|))/Us';
+    public $regex = '/\n((\|\|).*)(\n)(?!(\|\|))/Us';
 
 
 
@@ -85,7 +86,7 @@ class Text_Wiki_Parse_Table extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         // our eventual return value
         $return = '';
@@ -151,7 +152,6 @@ class Text_Wiki_Parse_Table extends Text_Wiki_Parse {
                     // add to the span and loop to the next cell
                     $span += 1;
                     continue;
-
                 } else {
 
                     // this cell has content.
@@ -179,7 +179,7 @@ class Text_Wiki_Parse_Table extends Text_Wiki_Parse {
                     // start a new cell...
                     $return .= $this->wiki->addToken(
                         $this->rule,
-                        array (
+                        array(
                             'type' => 'cell_start',
                             'attr' => $attr,
                             'span' => $span
@@ -192,7 +192,7 @@ class Text_Wiki_Parse_Table extends Text_Wiki_Parse {
                     // ...and end the cell.
                     $return .= $this->wiki->addToken(
                         $this->rule,
-                        array (
+                        array(
                             'type' => 'cell_end',
                             'attr' => $attr,
                             'span' => $span
@@ -202,7 +202,6 @@ class Text_Wiki_Parse_Table extends Text_Wiki_Parse {
                     // reset the span.
                     $span = 1;
                 }
-
             }
 
             // end the row
@@ -210,12 +209,13 @@ class Text_Wiki_Parse_Table extends Text_Wiki_Parse {
                 $this->rule,
                 array('type' => 'row_end')
             );
-
         }
 
         // wrap the return value in start and end tokens
         $start_string = 'table_start';
-        if (!$datatables) $start_string = 'table_start2';
+        if (!$datatables) {
+            $start_string = 'table_start2';
+        }
         $return =
             $this->wiki->addToken(
                 $this->rule,
