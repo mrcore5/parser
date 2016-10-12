@@ -23,6 +23,7 @@ require_once('Text/Wiki.php');
  * @version    Release: @package_version@
  * @author     Justin Patrin <justinpatrin@php.net>
  */
-class Text_Wiki_Default extends Text_Wiki {
+class Text_Wiki_Default extends Text_Wiki
+{
     //
 }

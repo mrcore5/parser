@@ -23,10 +23,10 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render {
-
-    var $conf = array(
-    	// list separator for params and throws
+class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render
+{
+    public $conf = array(
+        // list separator for params and throws
         'list_sep' => ', ',
 
         // the "main" format string
@@ -55,7 +55,7 @@ class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         extract($options); // name, access, return, params, throws
 
@@ -90,7 +90,7 @@ class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render {
         // build the set of throws
         $list = array();
         foreach ($throws as $key => $val) {
-               $tmp = $this->conf['format_throws'];
+            $tmp = $this->conf['format_throws'];
             $tmp = str_replace('%type', $this->textEncode($val['type']), $tmp);
             $tmp = str_replace('%descr', $this->textEncode($val['descr']), $tmp);
             $list[] = $tmp;

@@ -32,7 +32,8 @@
 *
 */
 
-class Text_Wiki_Parse_Paragraph extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Paragraph extends Text_Wiki_Parse
+{
 
     /**
     *
@@ -45,10 +46,10 @@ class Text_Wiki_Parse_Paragraph extends Text_Wiki_Parse {
     *
     */
 
-    var $regex = "/^.*?\n\n/m";
+    public $regex = "/^.*?\n\n/m";
     #var $regex = "/\n\n.*?\n/m"; #mReschke - This makes the first line of a topic NOT be surrounded with <p>
 
-    var $conf = array(
+    public $conf = array(
         'skip' => array(
             'blockquote', // are we sure about this one?
             'code',
@@ -79,7 +80,7 @@ class Text_Wiki_Parse_Paragraph extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         $delim = $this->wiki->delim;
 
@@ -131,7 +132,6 @@ class Text_Wiki_Parse_Paragraph extends Text_Wiki_Parse {
             // return the entire matched text.
             return $matches[0];
         } else {
-
             $start = $this->wiki->addToken(
                 $this->rule, array('type' => 'start')
             );

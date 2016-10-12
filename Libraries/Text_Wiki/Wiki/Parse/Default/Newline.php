@@ -32,7 +32,8 @@
 *
 */
 
-class Text_Wiki_Parse_Newline extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Newline extends Text_Wiki_Parse
+{
 
 
     /**
@@ -48,7 +49,7 @@ class Text_Wiki_Parse_Newline extends Text_Wiki_Parse {
     *
     */
 
-    var $regex = '/([^\n])\n([^\n])/m';
+    public $regex = '/([^\n])\n([^\n])/m';
 
 
     /**
@@ -64,7 +65,7 @@ class Text_Wiki_Parse_Newline extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         return $matches[1] .
             $this->wiki->addToken($this->rule) .

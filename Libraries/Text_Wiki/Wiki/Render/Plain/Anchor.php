@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+*
 * This class renders an anchor target name in XHTML.
 *
 * @author Manuel Holtgrewe <purestorm at ggnore dot net>
@@ -12,12 +12,10 @@
 *
 */
 
-class Text_Wiki_Render_Plain_Anchor extends Text_Wiki_Render {
-    
-    function token($options)
+class Text_Wiki_Render_Plain_Anchor extends Text_Wiki_Render
+{
+    public function token($options)
     {
         return $options['name'];
     }
 }
-
-?>

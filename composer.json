@@ -1,29 +1,29 @@
 {
-	"name": "mrcore/parser",
-	"type": "library",
-	"description": "Mrcore Parser Application",
-	"keywords": ["laravel", "mrcore", "mrcore5", "framework"],
-	"license": "MIT",
-	"support": {
-		"issues": "https://github.com/mrcore5/parser/issues",
-		"source": "https://github.com/mrcore5/parser"
-	},
-	"authors": [
-		{
-			"name": "Matthew Reschke",
-			"email": "mail@mreschke.com"
-		}
-	],
-	"require": {
-		"cebe/markdown": "~1.1",
-		"mrcore/text_wiki": "~1.0"
-	},
-	"autoload": {
-		"classmap": [
-			"TextWiki"
-		],
-		"psr-4": {
-			"Mrcore\\Parser\\": ""
-		}
-	}
+    "name": "mrcore/parser",
+    "type": "library",
+    "description": "Mrcore Parser Application",
+    "keywords": ["laravel", "mrcore", "mrcore5", "framework"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/mrcore5/parser/issues",
+        "source": "https://github.com/mrcore5/parser"
+    },
+    "authors": [
+        {
+            "name": "Matthew Reschke",
+            "email": "mail@mreschke.com"
+        }
+    ],
+    "require": {
+        "cebe/markdown": "~1.1",
+        "mrcore/text_wiki": "~1.0"
+    },
+    "autoload": {
+        "classmap": [
+            "TextWiki"
+        ],
+        "psr-4": {
+            "Mrcore\\Parser\\": ""
+        }
+    }
 }

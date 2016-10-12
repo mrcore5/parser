@@ -1,8 +1,8 @@
 <?php
 
-class Text_Wiki_Render_Latex_Colortext extends Text_Wiki_Render {
-    
-    var $colors = array(
+class Text_Wiki_Render_Latex_Colortext extends Text_Wiki_Render
+{
+    public $colors = array(
         'aqua',
         'black',
         'blue',
@@ -23,19 +23,19 @@ class Text_Wiki_Render_Latex_Colortext extends Text_Wiki_Render {
     
     
     /**
-    * 
+    *
     * Renders a token into text matching the requested format.
-    * 
+    *
     * @access public
-    * 
+    *
     * @param array $options The "options" portion of the token (second
     * element).
-    * 
+    *
     * @return string The text rendered from the token options.
-    * 
+    *
     */
     
-    function token($options)
+    public function token($options)
     {
         return 'Colortext: NI';
         
@@ -55,4 +55,3 @@ class Text_Wiki_Render_Latex_Colortext extends Text_Wiki_Render {
         }
     }
 }
-?>

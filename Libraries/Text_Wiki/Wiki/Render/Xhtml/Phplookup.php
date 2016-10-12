@@ -23,9 +23,9 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Xhtml_Phplookup extends Text_Wiki_Render {
-
-    var $conf = array(
+class Text_Wiki_Render_Xhtml_Phplookup extends Text_Wiki_Render
+{
+    public $conf = array(
         'target' => '_blank',
         'css' => null
     );
@@ -44,7 +44,7 @@ class Text_Wiki_Render_Xhtml_Phplookup extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         $text = trim($options['text']);
         $css = $this->formatConf(' class="%s"', 'css');

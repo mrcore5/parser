@@ -36,7 +36,8 @@ require_once 'Wiki/Render.php';
  * @version    Release: 1.2.0
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki {
+class Text_Wiki
+{
 
     /**
     *
@@ -48,7 +49,7 @@ class Text_Wiki {
     *
     */
     #mReschke (added Textbox)
-    var $rules = array(
+    public $rules = array(
         'Prefilter',
         'Delimiter',
         'Code',
@@ -105,7 +106,7 @@ class Text_Wiki {
     #    'Include',
     #    'Embed'
     #);
-    var $disable = array();
+    public $disable = array();
 
 
     /**
@@ -134,7 +135,7 @@ class Text_Wiki {
     *
     */
 
-    var $parseConf = array();
+    public $parseConf = array();
 
 
     /**
@@ -156,7 +157,7 @@ class Text_Wiki {
     *
     */
 
-    var $renderConf = array(
+    public $renderConf = array(
         'Docbook' => array(),
         'Latex' => array(),
         'Pdf' => array(),
@@ -187,7 +188,7 @@ class Text_Wiki {
     *
     */
 
-    var $formatConf = array(
+    public $formatConf = array(
         'Docbook' => array(),
         'Latex' => array(),
         'Pdf' => array(),
@@ -207,7 +208,7 @@ class Text_Wiki {
     *
     */
 
-    var $delim = "\xFF";
+    public $delim = "\xFF";
 
 
     /**
@@ -230,7 +231,7 @@ class Text_Wiki {
     *
     */
 
-    var $tokens = array();
+    public $tokens = array();
 
     /**
     * How many tokens generated pro rules.
@@ -240,7 +241,7 @@ class Text_Wiki {
     * @access private
     * @var array
     */
-    var $_countRulesTokens = array();
+    public $_countRulesTokens = array();
 
 
     /**
@@ -256,14 +257,14 @@ class Text_Wiki {
     *
     */
 
-    var $source = '';
+    public $source = '';
 
     /**
      * The output text
      *
      * @var string
      */
-    var $output = '';
+    public $output = '';
 
 
     /**
@@ -281,7 +282,7 @@ class Text_Wiki {
     *
     */
 
-    var $parseObj = array();
+    public $parseObj = array();
 
 
     /**
@@ -299,7 +300,7 @@ class Text_Wiki {
     *
     */
 
-    var $renderObj = array();
+    public $renderObj = array();
 
 
     /**
@@ -312,7 +313,7 @@ class Text_Wiki {
     *
     */
 
-    var $formatObj = array();
+    public $formatObj = array();
 
 
     /**
@@ -325,7 +326,7 @@ class Text_Wiki {
     *
     */
 
-    var $path = array(
+    public $path = array(
         'parse' => array(),
         'render' => array()
     );
@@ -342,35 +343,35 @@ class Text_Wiki {
     *
     */
 
-    var $_dirSep = DIRECTORY_SEPARATOR;
+    public $_dirSep = DIRECTORY_SEPARATOR;
 
     /**
      * Temporary configuration variable
      *
      * @var string
      */
-    var $renderingType = 'preg';
+    public $renderingType = 'preg';
 
     /**
      * Stack of rendering callbacks
      *
      * @var Array
      */
-    var $_renderCallbacks = array();
+    public $_renderCallbacks = array();
 
     /**
      * Current output block
      *
      * @var string
      */
-    var $_block;
+    public $_block;
 
     /**
      * A stack of blocks
      *
      * @param Array
      */
-    var $_blocks;
+    public $_blocks;
 
     /**
     *
@@ -385,7 +386,7 @@ class Text_Wiki {
     *   to null, which will load the default ruleset for this parser.
     */
 
-    function Text_Wiki($rules = null)
+    public function Text_Wiki($rules = null)
     {
         if (is_array($rules)) {
             $this->rules = array();
@@ -402,7 +403,6 @@ class Text_Wiki {
             'render',
             $this->fixPath(dirname(__FILE__)) . 'Wiki/Render/'
         );
-
     }
 
     /**
@@ -443,7 +443,7 @@ class Text_Wiki {
     *    in further calls it will be effectively ignored.
     * @return &object a reference to the Text_Wiki unique instantiation.
     */
-    function &singleton($parser = 'Default', $rules = null)
+    public function &singleton($parser = 'Default', $rules = null)
     {
         static $only = array();
         if (!isset($only[$parser])) {
@@ -467,7 +467,7 @@ class Text_Wiki {
      *    {@see Text_Wiki::singleton} for a list of rules
      * @return Text_Wiki a Parser object extended from Text_Wiki
      */
-    function &factory($parser = 'Default', $rules = null)
+    public function &factory($parser = 'Default', $rules = null)
     {
         $class = 'Text_Wiki_' . $parser;
         $file = str_replace('_', '/', $class).'.php';
@@ -502,7 +502,7 @@ class Text_Wiki {
     *
     */
 
-    function setParseConf($rule, $arg1, $arg2 = null)
+    public function setParseConf($rule, $arg1, $arg2 = null)
     {
         $rule = ucwords(strtolower($rule));
 
@@ -537,7 +537,7 @@ class Text_Wiki {
     *
     */
 
-    function getParseConf($rule, $key = null)
+    public function getParseConf($rule, $key = null)
     {
         $rule = ucwords(strtolower($rule));
 
@@ -581,7 +581,7 @@ class Text_Wiki {
     *
     */
 
-    function setRenderConf($format, $rule, $arg1, $arg2 = null)
+    public function setRenderConf($format, $rule, $arg1, $arg2 = null)
     {
         $format = ucwords(strtolower($format));
         $rule = ucwords(strtolower($rule));
@@ -623,7 +623,7 @@ class Text_Wiki {
     *
     */
 
-    function getRenderConf($format, $rule, $key = null)
+    public function getRenderConf($format, $rule, $key = null)
     {
         $format = ucwords(strtolower($format));
         $rule = ucwords(strtolower($rule));
@@ -646,7 +646,6 @@ class Text_Wiki {
             // no
             return null;
         }
-
     }
 
     /**
@@ -665,7 +664,7 @@ class Text_Wiki {
     *
     */
 
-    function setFormatConf($format, $arg1, $arg2 = null)
+    public function setFormatConf($format, $arg1, $arg2 = null)
     {
         if (! is_array($this->formatConf[$format])) {
             $this->formatConf[$format] = array();
@@ -699,7 +698,7 @@ class Text_Wiki {
     *
     */
 
-    function getFormatConf($format, $key = null)
+    public function getFormatConf($format, $key = null)
     {
         // the format does not exist
         if (! isset($this->formatConf[$format])) {
@@ -739,7 +738,7 @@ class Text_Wiki {
     *
     */
 
-    function insertRule($name, $tgt = null)
+    public function insertRule($name, $tgt = null)
     {
         $name = ucwords(strtolower($name));
         if (! is_null($tgt)) {
@@ -789,7 +788,6 @@ class Text_Wiki {
         }
 
         return true;
-
     }
 
 
@@ -805,7 +803,7 @@ class Text_Wiki {
     *
     */
 
-    function deleteRule($name)
+    public function deleteRule($name)
     {
         $name = ucwords(strtolower($name));
         $key = array_search($name, $this->rules);
@@ -829,7 +827,7 @@ class Text_Wiki {
     *
     */
 
-    function changeRule($old, $new)
+    public function changeRule($old, $new)
     {
         $old = ucwords(strtolower($old));
         $new = ucwords(strtolower($new));
@@ -854,7 +852,7 @@ class Text_Wiki {
     *
     */
 
-    function enableRule($name)
+    public function enableRule($name)
     {
         $name = ucwords(strtolower($name));
         $key = array_search($name, $this->disable);
@@ -876,7 +874,7 @@ class Text_Wiki {
     *
     */
 
-    function disableRule($name)
+    public function disableRule($name)
     {
         $name = ucwords(strtolower($name));
         $key = array_search($name, $this->disable);
@@ -915,7 +913,7 @@ class Text_Wiki {
     *
     */
 
-    function transform($text, $format = 'Xhtml')
+    public function transform($text, $format = 'Xhtml')
     {
         $this->parse($text);
         return $this->render($format);
@@ -936,7 +934,7 @@ class Text_Wiki {
     *
     */
 
-    function parse($text)
+    public function parse($text)
     {
         // set the object property for the source text
         $this->source = $text;
@@ -977,7 +975,7 @@ class Text_Wiki {
     *
     */
 
-    function render($format = 'Xhtml')
+    public function render($format = 'Xhtml')
     {
         // the rendering method we're going to use from each rule
         $format = ucwords(strtolower($format));
@@ -1046,7 +1044,6 @@ class Text_Wiki {
 
                     // yes; are we ending the section?
                     if ($char == $this->delim) {
-
                         if (count($this->_renderCallbacks) == 0) {
                             $this->output .= $this->_block;
                             $this->_block = '';
@@ -1071,14 +1068,11 @@ class Text_Wiki {
                         $opts = $this->tokens[$key][1];
                         $this->_block .= $this->renderObj[$rule]->token($opts);
                         $in_delim = false;
-
                     } else {
 
                         // no, add to the delimited token key number
                         $key .= $char;
-
                     }
-
                 } else {
 
                     // not currently in a delimited section.
@@ -1088,7 +1082,6 @@ class Text_Wiki {
                         // set the flag.
                         $key = '';
                         $in_delim = true;
-
                     } else {
                         // no, add to the output as-is
                         $this->_block .= $char;
@@ -1126,17 +1119,20 @@ class Text_Wiki {
      * @return string The rendered text for the token
      * @access private
      */
-    function _renderToken($matches) {
+    public function _renderToken($matches)
+    {
         return $this->renderObj[$this->tokens[$matches[1]][0]]->token($this->tokens[$matches[1]][1]);
     }
 
-    function registerRenderCallback($callback) {
+    public function registerRenderCallback($callback)
+    {
         $this->_blocks[] = $this->_block;
         $this->_block = '';
         $this->_renderCallbacks[] = $callback;
     }
 
-    function popRenderCallback() {
+    public function popRenderCallback()
+    {
         if (count($this->_renderCallbacks) == 0) {
             return Text_Wiki::error('Render callback popped when no render callbacks in stack');
         } else {
@@ -1163,7 +1159,7 @@ class Text_Wiki {
     *
     */
 
-    function getSource()
+    public function getSource()
     {
         return $this->source;
     }
@@ -1183,7 +1179,7 @@ class Text_Wiki {
     *
     */
 
-    function getTokens($rules = null)
+    public function getTokens($rules = null)
     {
         if (is_null($rules)) {
             return $this->tokens;
@@ -1222,7 +1218,7 @@ class Text_Wiki {
     *
     */
 
-    function addToken($rule, $options = array(), $id_only = false)
+    public function addToken($rule, $options = array(), $id_only = false)
     {
         // increment the token ID number.  note that if you parse
         // multiple times with the same Text_Wiki object, the ID number
@@ -1279,7 +1275,7 @@ class Text_Wiki {
     *
     */
 
-    function setToken($id, $rule, $options = array())
+    public function setToken($id, $rule, $options = array())
     {
         $oldRule = $this->tokens[$id][0];
         // reset the token
@@ -1310,7 +1306,7 @@ class Text_Wiki {
     *
     */
 
-    function loadParseObj($rule)
+    public function loadParseObj($rule)
     {
         $rule = ucwords(strtolower($rule));
         $file = $rule . '.php';
@@ -1333,7 +1329,6 @@ class Text_Wiki {
 
         #$this->parseObj[$rule] =& new $class($this);
         $this->parseObj[$rule] = new $class($this);
-
     }
 
 
@@ -1347,7 +1342,7 @@ class Text_Wiki {
     *
     */
 
-    function loadRenderObj($format, $rule)
+    public function loadRenderObj($format, $rule)
     {
         $format = ucwords(strtolower($format));
         $rule = ucwords(strtolower($rule));
@@ -1383,7 +1378,7 @@ class Text_Wiki {
     *
     */
 
-    function loadFormatObj($format)
+    public function loadFormatObj($format)
     {
         $format = ucwords(strtolower($format));
         $file = $format . '.php';
@@ -1421,7 +1416,7 @@ class Text_Wiki {
     *
     */
 
-    function addPath($type, $dir)
+    public function addPath($type, $dir)
     {
         $dir = $this->fixPath($dir);
         if (! isset($this->path[$type])) {
@@ -1445,7 +1440,7 @@ class Text_Wiki {
     *
     */
 
-    function getPath($type = null)
+    public function getPath($type = null)
     {
         if (is_null($type)) {
             return $this->path;
@@ -1471,7 +1466,7 @@ class Text_Wiki {
     *
     */
 
-    function findFile($type, $file)
+    public function findFile($type, $file)
     {
         // get the set of paths
         $set = $this->getPath($type);
@@ -1501,12 +1496,12 @@ class Text_Wiki {
     *
     */
 
-    function fixPath($path)
+    public function fixPath($path)
     {
         $len = strlen($this->_dirSep);
 
         if (! empty($path) &&
-            substr($path, -1 * $len, $len) != $this->_dirSep)    {
+            substr($path, -1 * $len, $len) != $this->_dirSep) {
             return $path . $this->_dirSep;
         } else {
             return $path;
@@ -1526,13 +1521,13 @@ class Text_Wiki {
     *
     */
 
-    function &error($message)
+    public function &error($message)
     {
         #if (! class_exists('PEAR_Error')) {
         #    include_once 'PEAR.php';
         #}
         #return PEAR::throwError($message);
-		echo $message;
+        echo $message;
     }
 
 
@@ -1548,7 +1543,7 @@ class Text_Wiki {
     *
     */
 
-    function isError(&$obj)
+    public function isError(&$obj)
     {
         return is_a($obj, 'PEAR_Error');
     }

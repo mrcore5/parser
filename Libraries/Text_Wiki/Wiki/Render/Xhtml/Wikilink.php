@@ -23,9 +23,9 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
-
-    var $conf = array(
+class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render
+{
+    public $conf = array(
         'pages' => array(), // set to null or false to turn off page checks
         'view_url' => 'http://example.com/index.php?page=%s',
         'new_url'  => 'http://example.com/new.php?page=%s',
@@ -50,7 +50,7 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         // make nice variable names (page, anchor, text)
         extract($options);
@@ -65,7 +65,7 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
         if (isset($this->conf['exists_callback'])) {
             $callback =& $this->conf['exists_callback'];
         } else {
-        	$callback = false;
+            $callback = false;
         }
 
         if ($callback) {
@@ -157,7 +157,6 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
                     // no useful href, return the text as it is
                     //TODO: This is no longer used, need to look closer into this branch
                     $output = $text;
-
                 } else {
 
                     // yes, link to the new-page href, but we have to build

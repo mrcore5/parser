@@ -24,9 +24,9 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Wiki
  */
-class Text_Wiki_Render_Xhtml_Code extends Text_Wiki_Render {
-
-    var $conf = array(
+class Text_Wiki_Render_Xhtml_Code extends Text_Wiki_Render
+{
+    public $conf = array(
         'css'      => null,
         'css_title' => null,
     );
@@ -44,7 +44,7 @@ class Text_Wiki_Render_Xhtml_Code extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         $text = $options['text'];
         $attr = $options['attr'];
@@ -60,12 +60,14 @@ class Text_Wiki_Render_Xhtml_Code extends Text_Wiki_Render {
         $css_title = $this->formatConf('class="%s"', 'title');
 
         #if ($height) $height = "style='height:${height}px !important; overflow:auto;'";
-        if ($title) $title = "<code>$title</code>";
+        if ($title) {
+            $title = "<code>$title</code>";
+        }
         $text = "<div $css>
             $title
             <pre class='language-$type'><code class='language-$type'>$text</code></pre>
         </div>";
 
-       return "\n$text\n\n";
+        return "\n$text\n\n";
     }
 }

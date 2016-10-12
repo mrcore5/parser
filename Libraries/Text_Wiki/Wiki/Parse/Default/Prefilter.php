@@ -33,7 +33,8 @@
 *
 */
 
-class Text_Wiki_Parse_Prefilter extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Prefilter extends Text_Wiki_Parse
+{
 
 
     /**
@@ -44,7 +45,7 @@ class Text_Wiki_Parse_Prefilter extends Text_Wiki_Parse {
     *
     */
 
-    function parse()
+    public function parse()
     {
         // convert DOS line endings
         $this->wiki->source = str_replace("\r\n", "\n", $this->wiki->source);
@@ -66,7 +67,7 @@ class Text_Wiki_Parse_Prefilter extends Text_Wiki_Parse {
         // add extra newlines at the top and end; this
         // seems to help many rules.
         $this->wiki->source = "\n" . $this->wiki->source . "\n\n";
-        $this->wiki->source = str_replace("\n----\n","\n\n----\n\n", $this->wiki->source);
+        $this->wiki->source = str_replace("\n----\n", "\n\n----\n\n", $this->wiki->source);
         $this->wiki->source = preg_replace("/\n(\\+{1,6})(.*)\n/m", "\n\n\\1 \\2\n\n", $this->wiki->source);
 
         // finally, compress all instances of 3 or more newlines
@@ -75,5 +76,4 @@ class Text_Wiki_Parse_Prefilter extends Text_Wiki_Parse {
         $replace = "\n\n";
         $this->wiki->source = preg_replace($find, $replace, $this->wiki->source);
     }
-
 }

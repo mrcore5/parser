@@ -27,9 +27,9 @@
 //mReschke 2011-10-15 added a bit of code to add <thead> and <tbody> though its not 100% accurate if your table doesn't have a header
 //I did this so that my datatables integration would work, datatables requires tbody and thead
 
-class Text_Wiki_Render_Xhtml_Table extends Text_Wiki_Render {
-
-    var $conf = array(
+class Text_Wiki_Render_Xhtml_Table extends Text_Wiki_Render
+{
+    public $conf = array(
         'css_table' => null,
         'css_table_simple' => null,
         'css_caption' => null,
@@ -52,7 +52,7 @@ class Text_Wiki_Render_Xhtml_Table extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         // make nice variable names (type, attr, span)
         $span = $rowspan = 1;
@@ -67,7 +67,7 @@ class Text_Wiki_Render_Xhtml_Table extends Text_Wiki_Render {
 
         case 'table_start':
             $css = $this->formatConf(' class="%s"', 'css_table');
-            $_SESSION['rand'] = rand(1,999);
+            $_SESSION['rand'] = rand(1, 999);
 
 $x = '
                                         <div class="table-header">

@@ -1,7 +1,8 @@
 <?php
 
 
-class Text_Wiki_Render_Plain_Url extends Text_Wiki_Render {
+class Text_Wiki_Render_Plain_Url extends Text_Wiki_Render
+{
 
 
     /**
@@ -17,7 +18,7 @@ class Text_Wiki_Render_Plain_Url extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         if ($options['type'] == 'start' || $options['type'] == 'end') {
             return '';
@@ -26,4 +27,3 @@ class Text_Wiki_Render_Plain_Url extends Text_Wiki_Render {
         }
     }
 }
-?>

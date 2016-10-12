@@ -1,10 +1,9 @@
 <?php
 
 
-class Text_Wiki_Render_Latex_Url extends Text_Wiki_Render {
-
-
-    var $conf = array(
+class Text_Wiki_Render_Latex_Url extends Text_Wiki_Render
+{
+    public $conf = array(
         'target' => false,
         'images' => true,
         'img_ext' => array('jpg', 'jpeg', 'gif', 'png')
@@ -23,7 +22,7 @@ class Text_Wiki_Render_Latex_Url extends Text_Wiki_Render {
     *
     */
 
-    function token($options)
+    public function token($options)
     {
         // create local variables from the options array (text,
         // href, type)
@@ -31,11 +30,10 @@ class Text_Wiki_Render_Latex_Url extends Text_Wiki_Render {
 
         if ($options['type'] == 'start') {
             return '';
-        } else if ($options['type'] == 'end') {
+        } elseif ($options['type'] == 'end') {
             return '\footnote{' . $href . '}';
         } else {
             return $text . '\footnote{' . $href . '}';
         }
     }
 }
-?>

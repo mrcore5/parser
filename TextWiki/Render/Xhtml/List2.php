@@ -1,132 +1,132 @@
 <?php
 
-class Text_Wiki_Render_Xhtml_List2 extends Text_Wiki_Render {
+class Text_Wiki_Render_Xhtml_List2 extends Text_Wiki_Render
+{
+    public $conf = array(
+        'css_ol' => null,
+        'css_ol_li' => null,
+        'css_ul' => null,
+        'css_ul_li' => null
+    );
 
-	var $conf = array(
-		'css_ol' => null,
-		'css_ol_li' => null,
-		'css_ul' => null,
-		'css_ul_li' => null
-	);
+    public function token($options)
+    {
+        // make nice variables (type, level, count)
+        extract($options);
 
-	function token($options)
-	{
-		// make nice variables (type, level, count)
-		extract($options);
+        // set up indenting so that the results look nice; we do this
+        // in two steps to avoid str_pad mathematics.  ;-)
+        $pad = str_pad('', $level, "\t");
+        $pad = str_replace("\t", '    ', $pad);
 
-		// set up indenting so that the results look nice; we do this
-		// in two steps to avoid str_pad mathematics.  ;-)
-		$pad = str_pad('', $level, "\t");
-		$pad = str_replace("\t", '	', $pad);
+        switch ($type) {
 
-		switch ($type) {
+        case 'bullet_list_start':
 
-		case 'bullet_list_start':
+            // build the base HTML
+            $css = $this->formatConf(' class="%s"', 'css_ul');
+            $html = "<ul$css>";
 
-			// build the base HTML
-			$css = $this->formatConf(' class="%s"', 'css_ul');
-			$html = "<ul$css>";
+            /*
+            // if this is the opening block for the list,
+            // put an extra newline in front of it so the
+            // output looks nice.
+            if ($level == 0) {
+                $html = "\n$html";
+            }
+            */
 
-			/*
-			// if this is the opening block for the list,
-			// put an extra newline in front of it so the
-			// output looks nice.
-			if ($level == 0) {
-				$html = "\n$html";
-			}
-			*/
+            // done!
+            return $html;
+            break;
 
-			// done!
-			return $html;
-			break;
+        case 'bullet_list_end':
 
-		case 'bullet_list_end':
+            // build the base HTML
+            $html = "</li>\n$pad</ul>";
 
-			// build the base HTML
-			$html = "</li>\n$pad</ul>";
+            // if this is the closing block for the list,
+            // put extra newlines after it so the output
+            // looks nice.
+            if ($level == 0) {
+                $html .= "\n\n";
+            }
 
-			// if this is the closing block for the list,
-			// put extra newlines after it so the output
-			// looks nice.
-			if ($level == 0) {
-				$html .= "\n\n";
-			}
+            // done!
+            return $html;
+            break;
 
-			// done!
-			return $html;
-			break;
+        case 'number_list_start':
+            if (isset($format)) {
+                $format = ' type="' . $format . '"';
+            } else {
+                $format = '';
+            }
+            // build the base HTML
+            $css = $this->formatConf(' class="%s"', 'css_ol');
+            $html = "<ol{$format}{$css}>";
 
-		case 'number_list_start':
-			if (isset($format)) {
-				$format = ' type="' . $format . '"';
-			} else  {
-				$format = '';
-			}
-			// build the base HTML
-			$css = $this->formatConf(' class="%s"', 'css_ol');
-			$html = "<ol{$format}{$css}>";
+            /*
+            // if this is the opening block for the list,
+            // put an extra newline in front of it so the
+            // output looks nice.
+            if ($level == 0) {
+                $html = "\n$html";
+            }
+            */
 
-			/*
-			// if this is the opening block for the list,
-			// put an extra newline in front of it so the
-			// output looks nice.
-			if ($level == 0) {
-				$html = "\n$html";
-			}
-			*/
+            // done!
+            return $html;
+            break;
 
-			// done!
-			return $html;
-			break;
+        case 'number_list_end':
 
-		case 'number_list_end':
+            // build the base HTML
+            $html = "</li>\n$pad</ol>";
 
-			// build the base HTML
-			$html = "</li>\n$pad</ol>";
+            // if this is the closing block for the list,
+            // put extra newlines after it so the output
+            // looks nice.
+            if ($level == 0) {
+                $html .= "\n\n";
+            }
 
-			// if this is the closing block for the list,
-			// put extra newlines after it so the output
-			// looks nice.
-			if ($level == 0) {
-				$html .= "\n\n";
-			}
+            // done!
+            return $html;
+            break;
 
-			// done!
-			return $html;
-			break;
+        case 'bullet_item_start':
+        case 'number_item_start':
 
-		case 'bullet_item_start':
-		case 'number_item_start':
+            // pick the proper CSS class
+            if ($type == 'bullet_item_start') {
+                $css = $this->formatConf(' class="%s"', 'css_ul_li');
+            } else {
+                $css = $this->formatConf(' class="%s"', 'css_ol_li');
+            }
 
-			// pick the proper CSS class
-			if ($type == 'bullet_item_start') {
-				$css = $this->formatConf(' class="%s"', 'css_ul_li');
-			} else {
-				$css = $this->formatConf(' class="%s"', 'css_ol_li');
-			}
+            // build the base HTML
+            $html = "\n$pad<li$css>";
 
-			// build the base HTML
-			$html = "\n$pad<li$css>";
+            // for the very first item in the list, do nothing.
+            // but for additional items, be sure to close the
+            // previous item.
+            if ($count > 0) {
+                $html = "</li>$html";
+            }
 
-			// for the very first item in the list, do nothing.
-			// but for additional items, be sure to close the
-			// previous item.
-			if ($count > 0) {
-				$html = "</li>$html";
-			}
+            // done!
+            return $html;
+            break;
 
-			// done!
-			return $html;
-			break;
-
-		case 'bullet_item_end':
-		case 'number_item_end':
-		default:
-			// ignore item endings and all other types.
-			// item endings are taken care of by the other types
-			// depending on their place in the list.
-			return '';
-			break;
-		}
-	}
+        case 'bullet_item_end':
+        case 'number_item_end':
+        default:
+            // ignore item endings and all other types.
+            // item endings are taken care of by the other types
+            // depending on their place in the list.
+            return '';
+            break;
+        }
+    }
 }

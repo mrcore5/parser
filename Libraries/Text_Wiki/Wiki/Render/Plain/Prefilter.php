@@ -20,7 +20,7 @@
 
 
 /**
-* 
+*
 * This class implements a Text_Wiki_Render_Xhtml to "pre-filter" source text so
 * that line endings are consistently \n, lines ending in a backslash \
 * are concatenated with the next line, and tabs are converted to spaces.
@@ -31,10 +31,10 @@
 *
 */
 
-class Text_Wiki_Render_Plain_Prefilter extends Text_Wiki_Render {
-    function token()
+class Text_Wiki_Render_Plain_Prefilter extends Text_Wiki_Render
+{
+    public function token()
     {
         return '';
     }
 }
-?>

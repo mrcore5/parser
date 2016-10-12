@@ -39,9 +39,9 @@
 *
 */
 
-class Text_Wiki_Parse_Freelink extends Text_Wiki_Parse {
-
-    var $conf = array (
+class Text_Wiki_Parse_Freelink extends Text_Wiki_Parse
+{
+    public $conf = array(
                        'utf-8' => false
     );
 
@@ -56,7 +56,7 @@ class Text_Wiki_Parse_Freelink extends Text_Wiki_Parse {
     *
     */
 
-    function Text_Wiki_Parse_Freelink(&$obj)
+    public function Text_Wiki_Parse_Freelink(&$obj)
     {
         parent::Text_Wiki_Parse($obj);
         if ($this->getConf('utf-8')) {
@@ -104,7 +104,7 @@ class Text_Wiki_Parse_Freelink extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         // use nice variable names
         $page = $matches[1];

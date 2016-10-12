@@ -28,7 +28,8 @@
 *
 */
 
-class Text_Wiki_Parse_Image extends Text_Wiki_Parse {
+class Text_Wiki_Parse_Image extends Text_Wiki_Parse
+{
 
     /**
      * URL schemes recognized by this rule.
@@ -36,7 +37,7 @@ class Text_Wiki_Parse_Image extends Text_Wiki_Parse {
      * @access public
      * @var array
     */
-    var $conf = array(
+    public $conf = array(
         'schemes' => 'http|https|ftp|gopher|news',
         'host_regexp' => '(?:[^.\s/"\'<\\\#delim#\ca-\cz]+\.)*[a-z](?:[-a-z0-9]*[a-z0-9])?\.?',
         'path_regexp' => '(?:/[^\s"<\\\#delim#\ca-\cz]*)?'
@@ -53,7 +54,7 @@ class Text_Wiki_Parse_Image extends Text_Wiki_Parse {
     *
     */
 
-    var $regex = '/(\[\[image\s+)(.+?)(\]\])/i';
+    public $regex = '/(\[\[image\s+)(.+?)(\]\])/i';
 
 
     /**
@@ -63,7 +64,7 @@ class Text_Wiki_Parse_Image extends Text_Wiki_Parse {
      * @var string
      * @see parse()
      */
-    var $url = '';
+    public $url = '';
 
      /**
      * Constructor.
@@ -73,14 +74,14 @@ class Text_Wiki_Parse_Image extends Text_Wiki_Parse {
      * @return The parser object
      * @access public
      */
-    function Text_Wiki_Parse_Image(&$obj)
+    public function Text_Wiki_Parse_Image(&$obj)
     {
         $default = $this->conf;
         parent::Text_Wiki_Parse($obj);
 
         // convert the list of recognized schemes to a regex OR,
         $schemes = $this->getConf('schemes', $default['schemes']);
-        $this->url = str_replace( '#delim#', $this->wiki->delim,
+        $this->url = str_replace('#delim#', $this->wiki->delim,
            '#(?:' . (is_array($schemes) ? implode('|', $schemes) : $schemes) . ')://'
            . $this->getConf('host_regexp', $default['host_regexp'])
            . $this->getConf('path_regexp', $default['path_regexp']) .'#');
@@ -103,7 +104,7 @@ class Text_Wiki_Parse_Image extends Text_Wiki_Parse {
     *
     */
 
-    function process(&$matches)
+    public function process(&$matches)
     {
         $pos = strpos($matches[2], ' ');
 

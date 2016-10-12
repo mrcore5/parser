@@ -8,28 +8,27 @@ use Mrcore\Parser\Markdown\Inline\EmojiTrait;
 
 class Markdown extends GithubMarkdown
 {
-	// Existing trait overrides
-	use TableTrait;
+    // Existing trait overrides
+    use TableTrait;
 
-	// New mrcore traints
-	use EmojiTrait;
-	use FileTrait;
+    // New mrcore traints
+    use EmojiTrait;
+    use FileTrait;
 
-	public function __construct()
-	{
-		$this->html5 = true;
-	}
+    public function __construct()
+    {
+        $this->html5 = true;
+    }
 
-	/**
-	 * render a table block
-	 */
-	protected function renderTable($block)
-	{
-		return str_replace(
-			"<table>",
-			"<table class='table table-condensed table-bordered table-striped table-hover dataTable no-footer'>",
-			parent::renderTable($block)
-		);
-	}
-
+    /**
+     * render a table block
+     */
+    protected function renderTable($block)
+    {
+        return str_replace(
+            "<table>",
+            "<table class='table table-condensed table-bordered table-striped table-hover dataTable no-footer'>",
+            parent::renderTable($block)
+        );
+    }
 }
