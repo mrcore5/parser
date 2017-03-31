@@ -96,6 +96,7 @@ class Mrcore extends Parser
             'Italic',        //unchanged original Text_Wiki
             'Underline',    //unchanged original Text_Wiki
             'Tt2',            //mrcore specific customization to existing Text_Wiki rule
+            'Backticks2',     //mrcore only rule, just like Tt except with backticks
             'Superscript',    //unchanged original Text_Wiki
             'Subscript',    //unchanged original Text_Wiki
             'Revise',        //unchanged original Text_Wiki
@@ -220,9 +221,12 @@ class Mrcore extends Parser
         #$wiki->setRenderConf('xhtml', 'url2', 'css_img', 'urlLink');  #image link CSS
         #$wiki->setRenderConf('xhtml', 'url2', 'css_footnote', 'urlLink');
 
-        // tt
+        // tt and backticks
         $wiki->setRenderConf('xhtml', 'tt2', 'use_code', false); //use <code> instead of <tt>
         $wiki->setRenderConf('xhtml', 'tt2', 'css', 'text-success');
+        $wiki->setRenderConf('xhtml', 'backticks2', 'use_code', false); //use <code> instead of <tt>
+        $wiki->setRenderConf('xhtml', 'backticks2', 'css', 'text-success');
+
 
         // configure smiley (defaults are good here and listed below)
         #$wiki->setRenderConf('xhtml', 'smiley2', 'prefix', 'images/smileys/icon_');
