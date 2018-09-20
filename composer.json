@@ -1,8 +1,8 @@
 {
     "name": "mrcore/parser",
-    "type": "library",
     "description": "Mrcore Parser Application",
     "keywords": ["laravel", "mrcore", "mrcore5", "framework"],
+    "type": "library",
     "license": "MIT",
     "support": {
         "issues": "https://github.com/mrcore5/parser/issues",
@@ -19,10 +19,10 @@
     },
     "autoload": {
         "classmap": [
-            "TextWiki"
+            "src/TextWiki"
         ],
         "psr-4": {
-            "Mrcore\\Parser\\": ""
+            "Mrcore\\Parser\\": "src/"
         }
     }
 }
