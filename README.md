@@ -1,4 +1,4 @@
-## mRcore Parser Module v5.7
+## mRcore Parser Module v5.8
 
 This is the mRcore parser module.
 
